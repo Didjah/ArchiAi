@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArchiAI — Conception Architecturale Intelligente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy:#0F172A; --navy-light:#1E293B; --gold:#F59E0B; --gold-light:#FCD34D; --white:#FFFFFF; --gray-50:#F8FAFC; --gray-200:#E2E8F0; --gray-400:#94A3B8; --gray-600:#475569; --radius:12px; --radius-sm:8px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--navy); min-height:100vh; }
+    nav { background:var(--navy); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+    .logo { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--gold); letter-spacing:1px; }
+    .logo span { color:var(--white); font-weight:400; }
+    .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.05); padding:4px; border-radius:8px; }
+    .lang-btn { background:transparent; border:none; color:var(--gray-400); font-size:13px; font-weight:500; padding:5px 12px; border-radius:6px; cursor:pointer; font-family:'Inter',sans-serif; transition:all 0.2s; }
+    .lang-btn.active { background:var(--gold); color:var(--navy); }
+    .hero { background:var(--navy); padding:48px 24px 40px; text-align:center; }
+    .hero-badge { display:inline-block; background:rgba(245,158,11,0.15); color:var(--gold); font-size:12px; font-weight:500; padding:5px 14px; border-radius:20px; border:1px solid rgba(245,158,11,0.3); margin-bottom:20px; }
+    .hero h1 { font-family:'Syne',sans-serif; font-size:28px; font-weight:700; color:var(--white); line-height:1.3; margin-bottom:12px; }
+    .hero h1 span { color:var(--gold); }
+    .hero p { color:var(--gray-400); font-size:15px; max-width:400px; margin:0 auto; line-height:1.6; }
+    .container { max-width:560px; margin:0 auto; padding:0 16px 40px; }
+    .card { background:var(--white); border-radius:var(--radius); border:1px solid var(--gray-200); margin-top:20px; overflow:hidden; }
+    .card-header { padding:18px 20px 0; }
+    .card-label { font-size:12px; font-weight:500; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:12px; }
+    .form-body { padding:0 20px 20px; }
+    textarea { width:100%; min-height:100px; border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); padding:12px 14px; font-size:14px; font-family:'Inter',sans-serif; color:var(--navy); background:var(--gray-50); resize:none; outline:none; transition:border-color 0.2s; line-height:1.6; }
+    textarea:focus { border-color:var(--gold); background:var(--white); }
+    textarea::placeholder { color:var(--gray-400); }
+    .form-row { display:flex; gap:10px; margin-top:12px; }
+    input[type="number"] { flex:1; border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); padding:10px 14px; font-size:14px; font-family:'Inter',sans-serif; color:var(--navy); background:var(--gray-50); outline:none; transition:border-color 0.2s; }
+    input[type="number"]:focus { border-color:var(--gold); }
+    input[type="number"]::placeholder { color:var(--gray-400); }
+    .voice-btn { display:flex; align-items:center; gap:7px; background:var(--gray-50); border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); padding:10px 16px; font-size:13px; font-family:'Inter',sans-serif; font-weight:500; color:var(--gray-600); cursor:pointer; white-space:nowrap; transition:all 0.2s; }
+    .voice-btn:hover { border-color:var(--gold); }
+    .mic-dot { width:10px; height:10px; background:#E24B4A; border-radius:50%; }
+    .mic-dot.recording { animation:pulse 1s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .generate-btn { width:100%; background:var(--gold); color:var(--navy); border:none; border-radius:var(--radius-sm); padding:14px; font-size:15px; font-weight:600; font-family:'Syne',sans-serif; cursor:pointer; margin-top:14px; transition:all 0.2s; }
+    .generate-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+    .generate-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+    .loading { display:none; text-align:center; padding:24px; color:var(--gray-400); font-size:14px; }
+    .loading.show { display:block; }
+    .loader { width:32px; height:32px; border:3px solid var(--gray-200); border-top-color:var(--gold); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 12px; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .result-section { display:none; border-top:1px solid var(--gray-200); }
+    .result-section.show { display:block; }
+    .result-body { padding:20px; }
+    .result-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:600; color:var(--navy); margin-bottom:8px; }
+    .result-text { font-size:14px; color:var(--gray-600); line-height:1.7; }
+    .tags { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+    .tag { font-size:12px; font-weight:500; padding:4px 12px; border-radius:20px; background:rgba(245,158,11,0.1); color:#92400E; border:1px solid rgba(245,158,11,0.2); }
+    .share-section { padding:0 20px 20px; }
+    .share-main-btn { width:100%; background:var(--navy); color:var(--white); border:none; border-radius:var(--radius-sm); padding:13px 20px; font-size:14px; font-weight:500; font-family:'Inter',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; transition:background 0.2s; }
+    .share-main-btn:hover { background:var(--navy-light); }
+    .arrow { font-size:11px; transition:transform 0.3s; opacity:0.6; }
+    .arrow.open { transform:rotate(180deg); }
+    .share-panel { overflow:hidden; max-height:0; transition:max-height 0.4s ease; }
+    .share-panel.open { max-height:500px; }
+    .share-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding-top:10px; }
+    .share-channel { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:var(--radius-sm); border:1px solid var(--gray-200); background:var(--gray-50); cursor:pointer; font-family:'Inter',sans-serif; transition:all 0.15s; text-align:left; }
+    .share-channel:hover { border-color:var(--gold); background:var(--white); }
+    .ch-icon { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--white); flex-shrink:0; }
+    .ch-name { font-size:13px; font-weight:500; color:var(--navy); }
+    .ch-sub { font-size:11px; color:var(--gray-400); margin-top:1px; }
+    .toast { display:none; background:var(--navy); color:var(--white); font-size:13px; text-align:center; padding:10px 16px; border-radius:var(--radius-sm); margin-top:10px; border-left:3px solid var(--gold); }
+    .toast.show { display:block; }
+    footer { text-align:center; padding:24px; color:var(--gray-400); font-size:12px; }
+    footer span { color:var(--gold); }
+    @media(max-width:400px){ .share-grid{grid-template-columns:1fr} .hero h1{font-size:22px} }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="logo">Archi<span>AI</span></div>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('fr',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-badge" id="badge">Conception architecturale par IA</div>
+  <h1 id="hero-title">Votre maison, <span>conçue par l'IA</span></h1>
+  <p id="hero-sub">Décrivez votre projet en quelques mots — ArchiAI génère votre plan architectural en quelques secondes.</p>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-header"><div class="card-label" id="form-label">Décrivez votre projet</div></div>
+    <div class="form-body">
+      <textarea id="description" placeholder="Ex : Je veux une villa de 3 chambres avec un grand salon, une cuisine ouverte, 2 salles de bain et un garage..."></textarea>
+      <div class="form-row">
+        <input type="number" id="surface" placeholder="Superficie (m²)" min="20" max="10000"/>
+        <button class="voice-btn" onclick="toggleVoice()">
+          <div class="mic-dot" id="micDot"></div>
+          <span id="voiceLabel">Voix</span>
+        </button>
+      </div>
+      <button class="generate-btn" onclick="generatePlan()" id="generateBtn">Générer mon plan</button>
+    </div>
+    <div class="loading" id="loading"><div class="loader"></div><span id="loading-text">ArchiAI analyse votre projet...</span></div>
+    <div class="result-section" id="resultSection">
+      <div class="result-body">
+        <div class="card-label" id="result-label">Plan généré par ArchiAI</div>
+        <div class="result-title" id="result-title"></div>
+        <div class="result-text" id="result-text"></div>
+        <div class="tags" id="result-tags"></div>
+      </div>
+      <div class="share-section">
+        <button class="share-main-btn" onclick="toggleShare()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span id="share-btn-label">Partager avec un architecte</span>
+          <span class="arrow" id="shareArrow">&#9660;</span>
+        </button>
+        <div class="share-panel" id="sharePanel">
+          <div class="share-grid">
+            <button class="share-channel" onclick="share('whatsapp')"><div class="ch-icon" style="background:#25D366">W</div><div><div class="ch-name">WhatsApp</div><div class="ch-sub" id="ch-wa">Envoyer le plan</div></div></button>
+            <button class="share-channel" onclick="share('email')"><div class="ch-icon" style="background:#185FA5">@</div><div><div class="ch-name">Email</div><div class="ch-sub" id="ch-em">Envoyer par mail</div></div></button>
+            <button class="share-channel" onclick="share('telegram')"><div class="ch-icon" style="background:#2AABEE">T</div><div><div class="ch-name">Telegram</div><div class="ch-sub" id="ch-tg">Envoyer le plan</div></div></button>
+            <button class="share-channel" onclick="share('sms')"><div class="ch-icon" style="background:#5F5E5A">S</div><div><div class="ch-name">SMS</div><div class="ch-sub" id="ch-sm">Envoyer par SMS</div></div></button>
+            <button class="share-channel" onclick="share('linkedin')"><div class="ch-icon" style="background:#0A66C2">in</div><div><div class="ch-name">LinkedIn</div><div class="ch-sub" id="ch-li">Partager</div></div></button>
+            <button class="share-channel" onclick="share('copy')"><div class="ch-icon" style="background:#534AB7">C</div><div><div class="ch-name" id="ch-copy-name">Copier le lien</div><div class="ch-sub" id="ch-cp">Partager partout</div></div></button>
+          </div>
+          <div class="toast" id="toast"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>ArchiAI &copy; 2025 — Propulsé par <span>l'Intelligence Artificielle</span></footer>
+<script>
+const T={fr:{badge:'Conception architecturale par IA',heroTitle:'Votre maison, <span>conçue par l\'IA</span>',heroSub:'Décrivez votre projet en quelques mots — ArchiAI génère votre plan architectural en quelques secondes.',formLabel:'Décrivez votre projet',placeholder:'Ex : Je veux une villa de 3 chambres avec un grand salon, une cuisine ouverte, 2 salles de bain et un garage...',surfacePh:'Superficie (m²)',voiceLabel:'Voix',generateBtn:'Générer mon plan',loadingText:'ArchiAI analyse votre projet...',resultLabel:'Plan généré par ArchiAI',shareBtnLabel:'Partager avec un architecte',chWa:'Envoyer le plan',chEm:'Envoyer par mail',chTg:'Envoyer le plan',chSm:'Envoyer par SMS',chLi:'Partager',chCpName:'Copier le lien',chCp:'Partager partout',toastMsg:c=>`Ouverture de ${c}...`,toastCopy:'Lien copié !',alertDesc:'Veuillez décrire votre projet.',alertSurf:'Veuillez indiquer la superficie.',tags:['Plan architectural','Plan sanitaire','Plan électrique']},en:{badge:'AI-powered architectural design',heroTitle:'Your home, <span>designed by AI</span>',heroSub:'Describe your project in a few words — ArchiAI generates your architectural plan in seconds.',formLabel:'Describe your project',placeholder:'Ex: I want a 3-bedroom villa with a large living room, open kitchen, 2 bathrooms and a garage...',surfacePh:'Surface area (m²)',voiceLabel:'Voice',generateBtn:'Generate my plan',loadingText:'ArchiAI is analyzing your project...',resultLabel:'Plan generated by ArchiAI',shareBtnLabel:'Share with an architect',chWa:'Send the plan',chEm:'Send by email',chTg:'Send the plan',chSm:'Send by SMS',chLi:'Share',chCpName:'Copy link',chCp:'Share anywhere',toastMsg:c=>`Opening ${c}...`,toastCopy:'Link copied!',alertDesc:'Please describe your project.',alertSurf:'Please enter the surface area.',tags:['Architectural plan','Sanitary plan','Electrical plan']}};
+let lang='fr',plan='';
+function setLang(l,btn){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const t=T[l];document.getElementById('badge').textContent=t.badge;document.getElementById('hero-title').innerHTML=t.heroTitle;document.getElementById('hero-sub').textContent=t.heroSub;document.getElementById('form-label').textContent=t.formLabel;document.getElementById('description').placeholder=t.placeholder;document.getElementById('surface').placeholder=t.surfacePh;document.getElementById('voiceLabel').textContent=t.voiceLabel;document.getElementById('generateBtn').textContent=t.generateBtn;document.getElementById('loading-text').textContent=t.loadingText;document.getElementById('result-label').textContent=t.resultLabel;document.getElementById('share-btn-label').textContent=t.shareBtnLabel;document.getElementById('ch-wa').textContent=t.chWa;document.getElementById('ch-em').textContent=t.chEm;document.getElementById('ch-tg').textContent=t.chTg;document.getElementById('ch-sm').textContent=t.chSm;document.getElementById('ch-li').textContent=t.chLi;document.getElementById('ch-copy-name').textContent=t.chCpName;document.getElementById('ch-cp').textContent=t.chCp;}
+async function generatePlan(){const desc=document.getElementById('description').value.trim();const surf=document.getElementById('surface').value.trim();const t=T[lang];if(!desc){alert(t.alertDesc);return;}if(!surf){alert(t.alertSurf);return;}document.getElementById('generateBtn').disabled=true;document.getElementById('loading').classList.add('show');document.getElementById('resultSection').classList.remove('show');try{const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:desc,surface:surf,lang})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Erreur');plan=d.result||'';const lines=plan.split('\n').filter(l=>l.trim());const title=lines[0].replace(/^1\.\s*/,'').replace(/^\*+|\*+$/g,'').trim();const body=lines.slice(1).join(' ').replace(/^2\.\s*/,'').trim();document.getElementById('result-title').textContent=title;document.getElementById('result-text').textContent=body;document.getElementById('result-tags').innerHTML=t.tags.map(g=>`<span class="tag">${g}</span>`).join('');document.getElementById('resultSection').classList.add('show');}catch(e){alert('Erreur lors de la génération. Réessayez.');console.error(e);}finally{document.getElementById('loading').classList.remove('show');document.getElementById('generateBtn').disabled=false;}}
+function toggleShare(){document.getElementById('sharePanel').classList.toggle('open');document.getElementById('shareArrow').classList.toggle('open');}
+function share(c){const t=T[lang];const txt=encodeURIComponent((lang==='fr'?'Bonjour, voici mon projet ArchiAI :\n\n':'Hello, here is my ArchiAI project:\n\n')+plan+'\n\n— ArchiAI');const url=encodeURIComponent(window.location.href);const urls={whatsapp:`https://wa.me/?text=${txt}`,email:`mailto:?subject=${encodeURIComponent('Mon projet ArchiAI')}&body=${txt}`,telegram:`https://t.me/share/url?url=${url}&text=${txt}`,sms:`sms:?body=${txt}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`};if(c==='copy'){navigator.clipboard.writeText(window.location.href+'\n\n'+plan).then(()=>showToast(t.toastCopy));}else{window.open(urls[c],'_blank');showToast(t.toastMsg(c.charAt(0).toUpperCase()+c.slice(1)));}}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+let rec=null,isRec=false;
+function toggleVoice(){if(!('webkitSpeechRecognition'in window)&&!('SpeechRecognition'in window)){alert('Votre navigateur ne supporte pas la reconnaissance vocale.');return;}if(isRec){rec.stop();return;}const SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang=lang==='fr'?'fr-FR':'en-US';rec.continuous=false;rec.interimResults=false;rec.onresult=e=>{document.getElementById('description').value=e.results[0][0].transcript;};rec.onstart=()=>{isRec=true;document.getElementById('micDot').classList.add('recording');document.getElementById('voiceLabel').textContent='Stop';};rec.onend=()=>{isRec=false;document.getElementById('micDot').classList.remove('recording');document.getElementById('voiceLabel').textContent=T[lang].voiceLabel;};rec.start();}
+</script>
+</body>
+</html>

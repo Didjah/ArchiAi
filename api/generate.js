@@ -1,0 +1,50 @@
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { description, surface, lang } = req.body;
+
+  if (!description || !surface) {
+    return res.status(400).json({ error: 'Description et superficie requises' });
+  }
+
+  const prompt = lang === 'fr'
+    ? `Tu es un architecte expert. Un client décrit son projet : "${description}" avec une superficie de ${surface} m². Génère un plan architectural professionnel et détaillé en français. Structure ta réponse ainsi :
+1. Nom du projet (ex: Villa moderne 3 chambres)
+2. Description du plan (disposition des pièces, orientation, flux de circulation) en 3-4 phrases claires.
+Sois précis, professionnel et pratique. Ne mentionne pas de coût ou d'estimation financière.`
+    : `You are an expert architect. A client describes their project: "${description}" with a surface area of ${surface} m². Generate a professional and detailed architectural plan in English. Structure your response as:
+1. Project name (ex: Modern 3-bedroom villa)
+2. Plan description (room layout, orientation, circulation flow) in 3-4 clear sentences.
+Be precise, professional and practical. Do not mention any cost or financial estimate.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: data.error?.message || 'Erreur API' });
+    }
+
+    const text = data.content?.[0]?.text || '';
+    res.status(200).json({ result: text });
+
+  } catch (err) {
+    console.error('API Error:', err);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+}
