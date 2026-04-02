@@ -24,7 +24,7 @@ Be precise, professional and practical. Do not mention any cost or financial est
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': process.env.CLE_API_ANTHROPIC,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
