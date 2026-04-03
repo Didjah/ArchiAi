@@ -26,30 +26,24 @@
       border-bottom: 2px solid #c9a84c;
     }
 
-    header h1 {
-      font-size: 2.4rem;
-      color: #c9a84c;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
+    header h1 { font-size: 2.4rem; color: #c9a84c; letter-spacing: 3px; text-transform: uppercase; }
     header p { font-size: 1rem; color: #b0bcd4; margin-top: 8px; }
 
-    .container { width: 100%; max-width: 800px; padding: 40px 20px; }
+    .container { width: 100%; max-width: 860px; padding: 40px 20px; }
 
     label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #c9a84c;
-      margin-bottom: 10px;
-      margin-top: 20px;
+      margin-bottom: 8px;
+      margin-top: 18px;
     }
 
     textarea, input[type="number"], select {
       width: 100%;
-      padding: 14px 16px;
+      padding: 13px 15px;
       background: #111827;
       border: 1px solid #c9a84c55;
       border-radius: 8px;
@@ -60,20 +54,20 @@
       transition: border 0.3s;
     }
 
-    textarea { resize: vertical; min-height: 100px; }
+    textarea { resize: vertical; min-height: 90px; }
     textarea:focus, input:focus, select:focus { border-color: #c9a84c; }
     select option { background: #111827; }
 
-    .row { display: flex; gap: 16px; }
+    .row { display: flex; gap: 14px; }
     .row > div { flex: 1; }
 
     button#generateBtn {
-      margin-top: 24px;
+      margin-top: 22px;
       width: 100%;
       padding: 16px;
       background: linear-gradient(135deg, #c9a84c, #a07830);
       color: #0a0f1e;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -86,107 +80,118 @@
     button#generateBtn:hover { opacity: 0.85; }
     button#generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    #loader {
-      display: none;
-      text-align: center;
-      margin-top: 24px;
-      color: #c9a84c;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-    }
+    #loader { display: none; text-align: center; margin-top: 22px; color: #c9a84c; font-size: 0.95rem; letter-spacing: 2px; }
 
-    /* IMAGES */
-    #image-section { display: none; margin-top: 32px; }
-
-    #image-section h2 {
-      font-size: 0.85rem;
+    /* SECTION TITRE */
+    .section-title {
+      font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #c9a84c;
       margin-bottom: 14px;
+      margin-top: 32px;
+      border-left: 3px solid #c9a84c;
+      padding-left: 10px;
     }
+
+    /* IMAGES */
+    #image-section { display: none; }
 
     .image-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .image-grid img {
       width: 100%;
-      height: 190px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #c9a84c33;
+      border-radius: 8px;
+      border: 1px solid #c9a84c33;
       transition: transform 0.2s;
     }
 
     .image-grid img:hover { transform: scale(1.02); }
 
+    /* PLAN SVG */
+    #plan-section { display: none; }
+
+    #plan-container {
+      background: #fff;
+      border-radius: 10px;
+      border: 2px solid #c9a84c;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #plan-container svg { width: 100%; height: auto; display: block; }
+
     /* RÉSULTAT */
     #result {
-      margin-top: 28px;
+      display: none;
       background: #111827;
       border: 1px solid #c9a84c44;
       border-radius: 10px;
-      padding: 28px;
-      display: none;
-    }
-
-    #result h2 {
-      color: #c9a84c;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+      padding: 26px;
     }
 
     #result-text {
       color: #e8dfc8;
       white-space: pre-wrap;
-      font-size: 0.97rem;
-      line-height: 1.8;
+      font-size: 0.96rem;
+      line-height: 1.85;
     }
 
-    /* PDF */
-    #pdf-btn {
-      display: none;
-      margin-top: 16px;
-      width: 100%;
-      padding: 14px;
-      background: #1a2a5e;
-      color: #c9a84c;
-      font-size: 1rem;
+    /* BOUTONS */
+    .action-buttons { display: none; gap: 12px; margin-top: 14px; }
+    .action-buttons button {
+      flex: 1;
+      padding: 13px;
+      font-size: 0.9rem;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      border: 1px solid #c9a84c;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
+    }
+
+    #pdf-btn {
+      background: #1a2a5e;
+      color: #c9a84c;
+      border: 1px solid #c9a84c;
     }
 
     #pdf-btn:hover { background: #c9a84c; color: #0a0f1e; }
 
-    /* PARTAGE */
-    .share-section { margin-top: 20px; display: none; }
+    #plan-pdf-btn {
+      background: #0a1a0a;
+      color: #4caf50;
+      border: 1px solid #4caf50;
+    }
 
-    .share-section p {
-      font-size: 0.8rem;
+    #plan-pdf-btn:hover { background: #4caf50; color: #fff; }
+
+    /* PARTAGE */
+    .share-section { margin-top: 14px; display: none; }
+
+    .share-label {
+      font-size: 0.78rem;
       color: #c9a84c;
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .share-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    .share-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .share-btn {
-      padding: 10px 16px;
+      padding: 9px 14px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: bold;
       color: white;
       transition: opacity 0.2s;
@@ -200,13 +205,7 @@
     .btn-linkedin { background: #0077B5; }
     .btn-copy     { background: #c9a84c; color: #0a0f1e; }
 
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.75rem;
-      color: #3a4a6a;
-    }
+    footer { margin-top: 60px; padding: 20px; text-align: center; font-size: 0.75rem; color: #3a4a6a; }
   </style>
 </head>
 <body>
@@ -219,12 +218,16 @@
 <div class="container">
 
   <label for="prompt">Décrivez votre projet</label>
-  <textarea id="prompt" placeholder="Ex : Villa avec grande terrasse, vue sur la mer, style moderne..."></textarea>
+  <textarea id="prompt" placeholder="Ex : Villa avec 3 chambres, salon, cuisine ouverte, grande terrasse, piscine..."></textarea>
 
   <div class="row">
     <div>
       <label for="superficie">Superficie (m²)</label>
-      <input type="number" id="superficie" placeholder="Ex : 150" min="20" max="10000" />
+      <input type="number" id="superficie" placeholder="Ex : 150" min="30" max="10000" />
+    </div>
+    <div>
+      <label for="pieces">Nombre de pièces</label>
+      <input type="number" id="pieces" placeholder="Ex : 5" min="1" max="20" />
     </div>
     <div>
       <label for="style">Style architectural</label>
@@ -243,23 +246,33 @@
 
   <div id="loader">⏳ Génération en cours...</div>
 
-  <!-- IMAGES DE RÉFÉRENCE -->
+  <!-- PHOTOS DE RÉFÉRENCE -->
   <div id="image-section">
-    <h2>🖼️ Références visuelles du projet</h2>
+    <div class="section-title">🖼️ Références visuelles du projet</div>
     <div class="image-grid" id="image-grid"></div>
   </div>
 
-  <!-- RÉSULTAT TEXTE -->
+  <!-- PLAN 2D -->
+  <div id="plan-section">
+    <div class="section-title">📐 Vue en plan — Floor Plan 2D</div>
+    <div id="plan-container"></div>
+  </div>
+
+  <!-- TEXTE GÉNÉRÉ -->
   <div id="result">
-    <h2>Plan architectural généré</h2>
+    <div class="section-title" style="margin-top:0">📋 Plan architectural généré</div>
     <div id="result-text"></div>
   </div>
 
-  <button id="pdf-btn" onclick="telechargerPDF()">📄 Télécharger en PDF</button>
+  <!-- BOUTONS PDF -->
+  <div class="action-buttons" id="action-buttons" style="display:none; flex-direction: row;">
+    <button id="pdf-btn" onclick="telechargerPDF()">📄 Télécharger PDF</button>
+    <button id="plan-pdf-btn" onclick="telechargerPlanPDF()">📐 Télécharger Plan PDF</button>
+  </div>
 
   <!-- PARTAGE -->
   <div class="share-section" id="shareSection">
-    <p>Partager</p>
+    <div class="share-label">Partager</div>
     <div class="share-buttons">
       <button class="share-btn btn-whatsapp" onclick="partager('whatsapp')">WhatsApp</button>
       <button class="share-btn btn-telegram" onclick="partager('telegram')">Telegram</button>
@@ -278,7 +291,7 @@
   let lastResult = '';
   let lastPrompt = '';
 
-  // Images fixes par style — URLs stables hébergées sur images.unsplash.com
+  // ─── IMAGES PAR STYLE ───────────────────────────────────────────────────────
   const IMAGES = {
     'moderne': [
       'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80',
@@ -318,47 +331,208 @@
     ]
   };
 
+  // ─── PLAN 2D SVG ─────────────────────────────────────────────────────────────
+  function genererPlan(description, nbPieces, superficie, style) {
+    const W = 800, H = 600;
+    const mur = 8;
+    const desc = description.toLowerCase();
+
+    // Détecter les pièces à partir de la description
+    const aPiscine   = desc.includes('piscine');
+    const aTerrasse  = desc.includes('terrasse');
+    const aCuisine   = desc.includes('cuisine');
+    const aSalon     = desc.includes('salon') || desc.includes('séjour') || desc.includes('sejour');
+    const aGarage    = desc.includes('garage');
+    const aBureau    = desc.includes('bureau');
+    const n          = parseInt(nbPieces) || 4;
+
+    // Couleurs selon style
+    const couleurs = {
+      'moderne':               { mur: '#1a1a2e', remplissage: '#e8f4f8', accent: '#4fc3f7', texte: '#1a1a2e' },
+      'traditionnel africain': { mur: '#3e2723', remplissage: '#fff8e1', accent: '#ff8f00', texte: '#3e2723' },
+      'contemporain':          { mur: '#212121', remplissage: '#f5f5f5', accent: '#78909c', texte: '#212121' },
+      'minimaliste':           { mur: '#424242', remplissage: '#fafafa', accent: '#bdbdbd', texte: '#424242' },
+      'colonial':              { mur: '#4e342e', remplissage: '#efebe9', accent: '#8d6e63', texte: '#4e342e' },
+      'tropical':              { mur: '#1b5e20', remplissage: '#f1f8e9', accent: '#66bb6a', texte: '#1b5e20' }
+    };
+
+    const c = couleurs[style] || couleurs['moderne'];
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">`;
+
+    // Fond
+    svg += `<rect width="${W}" height="${H}" fill="#f9f7f2"/>`;
+
+    // Titre plan
+    svg += `<text x="${W/2}" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="${c.mur}" letter-spacing="2">PLAN DE MASSE — FLOOR PLAN</text>`;
+    svg += `<text x="${W/2}" y="50" text-anchor="middle" font-size="10" fill="#888">${superficie ? superficie + ' m²' : ''} — Style ${style.toUpperCase()}</text>`;
+
+    // Périmètre extérieur de la maison
+    const bx = 60, by = 70, bw = 580, bh = 430;
+    svg += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${c.remplissage}" stroke="${c.mur}" stroke-width="${mur}" rx="4"/>`;
+
+    // ── Disposition selon nb de pièces ──────────────────────────
+    // Zone gauche : salon + cuisine
+    const salonW = Math.floor(bw * 0.45);
+    const salonH = Math.floor(bh * 0.55);
+
+    // SALON / SÉJOUR
+    svg += room(bx, by, salonW, salonH, 'SALON / SÉJOUR', c, mur, true);
+
+    // CUISINE
+    const cuisineH = bh - salonH;
+    svg += room(bx, by + salonH, salonW, cuisineH, 'CUISINE', c, mur);
+
+    // Zone droite : chambres
+    const rightX  = bx + salonW;
+    const rightW  = bw - salonW;
+    const nbChambres = Math.max(1, Math.min(n - 2, 4));
+    const chambreH = Math.floor(bh / nbChambres);
+
+    for (let i = 0; i < nbChambres; i++) {
+      const label = i === 0 ? 'CHAMBRE PRINCIPALE' : `CHAMBRE ${i + 1}`;
+      const y = by + i * chambreH;
+      const h = (i === nbChambres - 1) ? (by + bh - y) : chambreH;
+      svg += room(rightX, y, rightW, h, label, c, mur, i === 0);
+
+      // Salle de bain dans chaque chambre
+      const sbW = Math.floor(rightW * 0.35);
+      const sbH = Math.floor(h * 0.42);
+      svg += `<rect x="${rightX + rightW - sbW}" y="${y + h - sbH}" width="${sbW}" height="${sbH}" fill="#ddeeff" stroke="${c.mur}" stroke-width="3"/>`;
+      svg += `<text x="${rightX + rightW - sbW/2}" y="${y + h - sbH/2 + 4}" text-anchor="middle" font-size="9" fill="${c.mur}">SDB</text>`;
+      // Symbole baignoire
+      svg += `<ellipse cx="${rightX + rightW - sbW/2}" cy="${y + h - sbH + 16}" rx="${sbW*0.28}" ry="8" fill="none" stroke="${c.accent}" stroke-width="2"/>`;
+    }
+
+    // ── TERRASSE ──────────────────────────────────────────────────
+    if (aTerrasse) {
+      const tx = bx, ty = by + bh, tw = Math.floor(bw * 0.55), th = 70;
+      svg += `<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" fill="#ffe0b2" stroke="${c.mur}" stroke-width="4" stroke-dasharray="6,3"/>`;
+      svg += `<text x="${tx + tw/2}" y="${ty + th/2 + 5}" text-anchor="middle" font-size="11" fill="${c.mur}" font-weight="bold">TERRASSE</text>`;
+    }
+
+    // ── PISCINE ───────────────────────────────────────────────────
+    if (aPiscine) {
+      const px = bx + (aTerrasse ? Math.floor(bw*0.58) : 0), py = by + bh + 10;
+      const pw = 160, ph = 55;
+      svg += `<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="#b3e5fc" stroke="#0288d1" stroke-width="3" rx="20"/>`;
+      svg += `<text x="${px + pw/2}" y="${py + ph/2 + 5}" text-anchor="middle" font-size="11" fill="#0288d1" font-weight="bold">PISCINE</text>`;
+      // Vagues
+      for (let wi = 0; wi < 3; wi++) {
+        svg += `<path d="M${px+15+wi*45},${py+30} q10,-8 20,0 q10,8 20,0" fill="none" stroke="#4fc3f7" stroke-width="1.5"/>`;
+      }
+    }
+
+    // ── GARAGE ────────────────────────────────────────────────────
+    if (aGarage) {
+      const gx = bx + bw + 10, gy = by, gw = 100, gh = 120;
+      svg += `<rect x="${gx}" y="${gy}" width="${gw}" height="${gh}" fill="#e0e0e0" stroke="${c.mur}" stroke-width="4"/>`;
+      svg += `<text x="${gx + gw/2}" y="${gy + gh/2 + 5}" text-anchor="middle" font-size="11" fill="${c.mur}" font-weight="bold">GARAGE</text>`;
+      // Porte garage
+      svg += `<rect x="${gx + 10}" y="${gy + gh - 20}" width="${gw - 20}" height="15" fill="#bdbdbd" stroke="${c.mur}" stroke-width="2"/>`;
+    }
+
+    // ── LÉGENDE ───────────────────────────────────────────────────
+    const lx = 60, ly = H - 55;
+    svg += `<rect x="${lx}" y="${ly}" width="12" height="12" fill="${c.remplissage}" stroke="${c.mur}" stroke-width="2"/>`;
+    svg += `<text x="${lx+16}" y="${ly+10}" font-size="10" fill="#555">Pièce principale</text>`;
+    svg += `<rect x="${lx+140}" y="${ly}" width="12" height="12" fill="#ddeeff" stroke="${c.mur}" stroke-width="1"/>`;
+    svg += `<text x="${lx+156}" y="${ly+10}" font-size="10" fill="#555">Salle de bain</text>`;
+    if (aPiscine) {
+      svg += `<rect x="${lx+280}" y="${ly}" width="12" height="12" fill="#b3e5fc" stroke="#0288d1" stroke-width="1"/>`;
+      svg += `<text x="${lx+296}" y="${ly+10}" font-size="10" fill="#555">Piscine</text>`;
+    }
+    if (aTerrasse) {
+      svg += `<rect x="${lx+370}" y="${ly}" width="12" height="12" fill="#ffe0b2" stroke="${c.mur}" stroke-width="1"/>`;
+      svg += `<text x="${lx+386}" y="${ly+10}" font-size="10" fill="#555">Terrasse</text>`;
+    }
+
+    // Nord
+    svg += `<text x="${W-50}" y="80" text-anchor="middle" font-size="22" fill="${c.mur}">↑</text>`;
+    svg += `<text x="${W-50}" y="100" text-anchor="middle" font-size="11" fill="${c.mur}" font-weight="bold">N</text>`;
+
+    // Échelle
+    svg += `<line x1="${W-140}" y1="${H-20}" x2="${W-40}" y2="${H-20}" stroke="${c.mur}" stroke-width="2"/>`;
+    svg += `<line x1="${W-140}" y1="${H-25}" x2="${W-140}" y2="${H-15}" stroke="${c.mur}" stroke-width="2"/>`;
+    svg += `<line x1="${W-40}"  y1="${H-25}" x2="${W-40}"  y2="${H-15}" stroke="${c.mur}" stroke-width="2"/>`;
+    svg += `<text x="${W-90}" y="${H-8}" text-anchor="middle" font-size="9" fill="#777">Échelle indicative</text>`;
+
+    svg += `</svg>`;
+    return svg;
+  }
+
+  // ─── HELPER : dessiner une pièce ─────────────────────────────────────────────
+  function room(x, y, w, h, label, c, mur, principale) {
+    let s = '';
+    const fill = principale ? c.remplissage : '#fff';
+    s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${c.mur}" stroke-width="${mur}" />`;
+
+    // Porte (petit arc)
+    const porteTaille = 28;
+    s += `<line x1="${x + porteTaille}" y1="${y + h}" x2="${x + porteTaille}" y2="${y + h - porteTaille}" stroke="${c.mur}" stroke-width="2"/>`;
+    s += `<path d="M${x},${y+h} a${porteTaille},${porteTaille} 0 0,1 ${porteTaille},${-porteTaille}" fill="none" stroke="${c.accent}" stroke-width="1.5"/>`;
+
+    // Étiquette
+    s += `<text x="${x + w/2}" y="${y + h/2}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="bold" fill="${c.texte}">${label}</text>`;
+
+    // Surface indicative
+    if (w > 100 && h > 60) {
+      const surf = Math.round((w/800) * (h/600) * 100 * 15);
+      s += `<text x="${x + w/2}" y="${y + h/2 + 18}" text-anchor="middle" font-size="9" fill="#999">~${surf} m²</text>`;
+    }
+    return s;
+  }
+
+  // ─── IMAGES ──────────────────────────────────────────────────────────────────
   function afficherImages(style) {
     const grid = document.getElementById('image-grid');
     const imageSection = document.getElementById('image-section');
     const urls = IMAGES[style] || IMAGES['moderne'];
     grid.innerHTML = '';
-
     urls.forEach(url => {
       const img = document.createElement('img');
       img.src = url;
-      img.alt = 'Référence architecturale ' + style;
+      img.alt = 'Référence architecturale';
       img.loading = 'lazy';
+      img.onerror = () => { img.style.display = 'none'; };
       grid.appendChild(img);
     });
-
     imageSection.style.display = 'block';
   }
 
+  // ─── GÉNÉRER ─────────────────────────────────────────────────────────────────
   async function generer() {
     const prompt     = document.getElementById('prompt').value.trim();
     const superficie = document.getElementById('superficie').value;
+    const pieces     = document.getElementById('pieces').value;
     const style      = document.getElementById('style').value;
 
     if (!prompt) { alert('Veuillez décrire votre projet.'); return; }
 
-    const promptComplet = `${prompt}. Style : ${style}.${superficie ? ' Superficie : ' + superficie + ' m².' : ''}`;
+    const promptComplet = `${prompt}. Style : ${style}.${superficie ? ' Superficie : ' + superficie + ' m².' : ''}${pieces ? ' Nombre de pièces : ' + pieces + '.' : ''}`;
     lastPrompt = promptComplet;
 
     const btn          = document.getElementById('generateBtn');
     const loader       = document.getElementById('loader');
     const result       = document.getElementById('result');
     const shareSection = document.getElementById('shareSection');
-    const pdfBtn       = document.getElementById('pdf-btn');
+    const actionBtns   = document.getElementById('action-buttons');
+    const planSection  = document.getElementById('plan-section');
+    const planContainer= document.getElementById('plan-container');
 
     btn.disabled = true;
     loader.style.display = 'block';
     result.style.display = 'none';
     shareSection.style.display = 'none';
-    pdfBtn.style.display = 'none';
+    actionBtns.style.display = 'none';
+    planSection.style.display = 'none';
 
-    // Afficher les images immédiatement
+    // Photos immédiatement
     afficherImages(style);
+
+    // Plan 2D immédiatement
+    planContainer.innerHTML = genererPlan(prompt, pieces, superficie, style);
+    planSection.style.display = 'block';
 
     try {
       const response = await fetch('/api/generate', {
@@ -373,7 +547,7 @@
       lastResult = data.result;
       document.getElementById('result-text').textContent = lastResult;
       result.style.display = 'block';
-      pdfBtn.style.display = 'block';
+      actionBtns.style.display = 'flex';
       shareSection.style.display = 'block';
 
     } catch (err) {
@@ -384,11 +558,12 @@
     }
   }
 
+  // ─── PDF TEXTE ───────────────────────────────────────────────────────────────
   function telechargerPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.setFontSize(22);
+    doc.setFontSize(20);
     doc.setTextColor(15, 30, 80);
     doc.text('ArchiAI - Plan Architectural', 20, 22);
 
@@ -413,6 +588,46 @@
     doc.save('plan-archi-ai.pdf');
   }
 
+  // ─── PDF PLAN ────────────────────────────────────────────────────────────────
+  function telechargerPlanPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'landscape', format: 'a4' });
+    const svgEl = document.querySelector('#plan-container svg');
+    if (!svgEl) { alert('Aucun plan à télécharger.'); return; }
+
+    const svgData = new XMLSerializer().serializeToString(svgEl);
+    const canvas  = document.createElement('canvas');
+    canvas.width  = 800;
+    canvas.height = 600;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+
+    img.onload = () => {
+      ctx.fillStyle = '#f9f7f2';
+      ctx.fillRect(0, 0, 800, 600);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+
+      const imgData = canvas.toDataURL('image/png');
+      doc.setFontSize(16);
+      doc.setTextColor(15, 30, 80);
+      doc.text('ArchiAI - Vue en Plan / Floor Plan', 20, 18);
+      doc.setFontSize(10);
+      doc.setTextColor(120);
+      doc.text(lastPrompt.substring(0, 100), 20, 27);
+      doc.addImage(imgData, 'PNG', 15, 33, 267, 180);
+      doc.setFontSize(8);
+      doc.setTextColor(160);
+      doc.text('ArchiAI - ' + new Date().toLocaleDateString('fr-FR'), 20, 220);
+      doc.save('floor-plan-archi-ai.pdf');
+    };
+
+    img.src = url;
+  }
+
+  // ─── PARTAGE ─────────────────────────────────────────────────────────────────
   function partager(type) {
     const texte = encodeURIComponent('🏠 Plan ArchiAI :\n\n' + lastResult);
     const url   = encodeURIComponent(window.location.href);
