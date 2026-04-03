@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ArchiAI — Votre maison, conçue par l'IA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -68,9 +69,7 @@
       transition: border 0.3s;
     }
 
-    textarea:focus {
-      border-color: #c9a84c;
-    }
+    textarea:focus { border-color: #c9a84c; }
 
     button#generateBtn {
       margin-top: 20px;
@@ -91,30 +90,90 @@
     button#generateBtn:hover { opacity: 0.85; }
     button#generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    #loader {
+      display: none;
+      text-align: center;
+      margin-top: 24px;
+      color: #c9a84c;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+    }
+
+    #image-section {
+      display: none;
+      margin-top: 32px;
+    }
+
+    #image-section h2 {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 12px;
+    }
+
+    #generated-image {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #c9a84c44;
+      display: block;
+    }
+
+    #image-loader {
+      text-align: center;
+      padding: 40px;
+      color: #b0bcd4;
+      font-size: 0.9rem;
+      background: #111827;
+      border-radius: 10px;
+      border: 1px solid #c9a84c22;
+    }
+
     #result {
-      margin-top: 36px;
+      margin-top: 28px;
       background: #111827;
       border: 1px solid #c9a84c44;
       border-radius: 10px;
       padding: 28px;
-      white-space: pre-wrap;
-      font-size: 0.97rem;
-      line-height: 1.8;
       display: none;
     }
 
     #result h2 {
       color: #c9a84c;
-      font-size: 1rem;
+      font-size: 0.85rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 16px;
     }
 
-    #result-text { color: #e8dfc8; }
+    #result-text {
+      color: #e8dfc8;
+      white-space: pre-wrap;
+      font-size: 0.97rem;
+      line-height: 1.8;
+    }
+
+    #pdf-btn {
+      display: none;
+      margin-top: 16px;
+      width: 100%;
+      padding: 14px;
+      background: #1a2a5e;
+      color: #c9a84c;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid #c9a84c;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #pdf-btn:hover { background: #c9a84c; color: #0a0f1e; }
 
     .share-section {
-      margin-top: 24px;
+      margin-top: 20px;
       display: none;
     }
 
@@ -151,17 +210,8 @@
     .btn-linkedin { background: #0077B5; }
     .btn-copy     { background: #c9a84c; color: #0a0f1e; }
 
-    #loader {
-      display: none;
-      text-align: center;
-      margin-top: 24px;
-      color: #c9a84c;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-    }
-
     footer {
-      margin-top: auto;
+      margin-top: 60px;
       padding: 20px;
       text-align: center;
       font-size: 0.75rem;
@@ -185,10 +235,18 @@
 
   <div id="loader">⏳ Génération en cours...</div>
 
+  <div id="image-section">
+    <h2>🖼️ Visualisation du projet</h2>
+    <div id="image-loader">🎨 Génération de l'image architecturale...</div>
+    <img id="generated-image" style="display:none;" alt="Visualisation architecturale" />
+  </div>
+
   <div id="result">
     <h2>Plan architectural généré</h2>
     <div id="result-text"></div>
   </div>
+
+  <button id="pdf-btn" onclick="telechargerPDF()">📄 Télécharger en PDF</button>
 
   <div class="share-section" id="shareSection">
     <p>Partager</p>
@@ -204,30 +262,36 @@
 
 </div>
 
-<footer>ArchiAI — Propulsé par Groq IA</footer>
+<footer>ArchiAI — Propulsé par Groq IA & Pollinations</footer>
 
 <script>
   let lastResult = '';
+  let lastPrompt = '';
 
   async function generer() {
     const prompt = document.getElementById('prompt').value.trim();
-    if (!prompt) {
-      alert('Veuillez décrire votre projet.');
-      return;
-    }
+    if (!prompt) { alert('Veuillez décrire votre projet.'); return; }
 
-    const btn = document.getElementById('generateBtn');
-    const loader = document.getElementById('loader');
-    const result = document.getElementById('result');
+    lastPrompt = prompt;
+
+    const btn          = document.getElementById('generateBtn');
+    const loader       = document.getElementById('loader');
+    const result       = document.getElementById('result');
     const shareSection = document.getElementById('shareSection');
-    const resultText = document.getElementById('result-text');
+    const pdfBtn       = document.getElementById('pdf-btn');
+    const imageSection = document.getElementById('image-section');
+    const imgLoader    = document.getElementById('image-loader');
+    const img          = document.getElementById('generated-image');
 
     btn.disabled = true;
     loader.style.display = 'block';
     result.style.display = 'none';
     shareSection.style.display = 'none';
+    pdfBtn.style.display = 'none';
+    imageSection.style.display = 'none';
 
     try {
+      // 1. Texte via Groq
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -235,15 +299,33 @@
       });
 
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erreur serveur');
-      }
+      if (!response.ok) throw new Error(data.error || 'Erreur serveur');
 
       lastResult = data.result;
-      resultText.textContent = lastResult;
+      document.getElementById('result-text').textContent = lastResult;
       result.style.display = 'block';
+      pdfBtn.style.display = 'block';
       shareSection.style.display = 'block';
+
+      // 2. Image via Pollinations (gratuit, sans clé API)
+      imageSection.style.display = 'block';
+      imgLoader.style.display = 'block';
+      img.style.display = 'none';
+
+      const imagePrompt = encodeURIComponent(
+        'architectural rendering, ' + prompt +
+        ', photorealistic, luxury, professional architecture photography, high quality, 4k'
+      );
+      const imageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=800&height=500&nologo=true`;
+
+      img.onload = () => {
+        imgLoader.style.display = 'none';
+        img.style.display = 'block';
+      };
+      img.onerror = () => {
+        imgLoader.textContent = '⚠️ Image non disponible pour ce projet.';
+      };
+      img.src = imageUrl;
 
     } catch (err) {
       alert('Erreur : ' + err.message);
@@ -253,9 +335,37 @@
     }
   }
 
+  function telechargerPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.setTextColor(15, 30, 80);
+    doc.text('ArchiAI - Plan Architectural', 20, 20);
+
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    doc.text('Projet : ' + lastPrompt, 20, 32);
+    doc.text('Genere le : ' + new Date().toLocaleDateString('fr-FR'), 20, 40);
+
+    doc.setDrawColor(201, 168, 76);
+    doc.line(20, 46, 190, 46);
+
+    doc.setFontSize(11);
+    doc.setTextColor(30);
+    const lines = doc.splitTextToSize(lastResult, 170);
+    doc.text(lines, 20, 56);
+
+    doc.setFontSize(9);
+    doc.setTextColor(150);
+    doc.text('ArchiAI - Propulse par Groq IA', 20, 285);
+
+    doc.save('plan-archi-ai.pdf');
+  }
+
   function partager(type) {
     const texte = encodeURIComponent('🏠 Plan ArchiAI :\n\n' + lastResult);
-    const url = encodeURIComponent(window.location.href);
+    const url   = encodeURIComponent(window.location.href);
     const liens = {
       whatsapp: `https://wa.me/?text=${texte}`,
       telegram: `https://t.me/share/url?url=${url}&text=${texte}`,
@@ -265,7 +375,7 @@
     };
     if (type === 'copy') {
       navigator.clipboard.writeText(lastResult);
-      alert('✅ Copié dans le presse-papier !');
+      alert('Copie dans le presse-papier !');
     } else {
       window.open(liens[type], '_blank');
     }
