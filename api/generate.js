@@ -10,14 +10,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.CLE_API_OPENAI}`
+        'Authorization': `Bearer ${process.env.CLE_API_GROQ}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'llama3-70b-8192',
         max_tokens: 1500,
         messages: [
           {
@@ -38,7 +38,7 @@ Structure ta réponse avec des sections : Concept, Matériaux, Espaces, Durabili
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error?.message || 'Erreur OpenAI');
+      throw new Error(data.error?.message || 'Erreur Groq');
     }
 
     const text = data.choices[0].message.content;
