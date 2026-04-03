@@ -33,17 +33,9 @@
       text-transform: uppercase;
     }
 
-    header p {
-      font-size: 1rem;
-      color: #b0bcd4;
-      margin-top: 8px;
-    }
+    header p { font-size: 1rem; color: #b0bcd4; margin-top: 8px; }
 
-    .container {
-      width: 100%;
-      max-width: 800px;
-      padding: 40px 20px;
-    }
+    .container { width: 100%; max-width: 800px; padding: 40px 20px; }
 
     label {
       display: block;
@@ -70,14 +62,9 @@
 
     textarea { resize: vertical; min-height: 100px; }
     textarea:focus, input:focus, select:focus { border-color: #c9a84c; }
-
     select option { background: #111827; }
 
-    .row {
-      display: flex;
-      gap: 16px;
-    }
-
+    .row { display: flex; gap: 16px; }
     .row > div { flex: 1; }
 
     button#generateBtn {
@@ -108,18 +95,15 @@
       letter-spacing: 2px;
     }
 
-    /* IMAGE */
-    #image-section {
-      display: none;
-      margin-top: 32px;
-    }
+    /* IMAGES */
+    #image-section { display: none; margin-top: 32px; }
 
     #image-section h2 {
       font-size: 0.85rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #c9a84c;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .image-grid {
@@ -130,11 +114,14 @@
 
     .image-grid img {
       width: 100%;
-      height: 200px;
+      height: 190px;
       object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid #c9a84c33;
+      border-radius: 10px;
+      border: 2px solid #c9a84c33;
+      transition: transform 0.2s;
     }
+
+    .image-grid img:hover { transform: scale(1.02); }
 
     /* RÉSULTAT */
     #result {
@@ -182,10 +169,7 @@
     #pdf-btn:hover { background: #c9a84c; color: #0a0f1e; }
 
     /* PARTAGE */
-    .share-section {
-      margin-top: 20px;
-      display: none;
-    }
+    .share-section { margin-top: 20px; display: none; }
 
     .share-section p {
       font-size: 0.8rem;
@@ -195,11 +179,7 @@
       margin-bottom: 12px;
     }
 
-    .share-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .share-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .share-btn {
       padding: 10px 16px;
@@ -263,13 +243,13 @@
 
   <div id="loader">⏳ Génération en cours...</div>
 
-  <!-- IMAGES -->
+  <!-- IMAGES DE RÉFÉRENCE -->
   <div id="image-section">
     <h2>🖼️ Références visuelles du projet</h2>
     <div class="image-grid" id="image-grid"></div>
   </div>
 
-  <!-- RÉSULTAT -->
+  <!-- RÉSULTAT TEXTE -->
   <div id="result">
     <h2>Plan architectural généré</h2>
     <div id="result-text"></div>
@@ -298,27 +278,57 @@
   let lastResult = '';
   let lastPrompt = '';
 
-  // Mots-clés Unsplash selon le style
-  const styleImages = {
-    'moderne':               ['modern+house', 'modern+architecture', 'contemporary+home', 'modern+villa'],
-    'traditionnel africain': ['african+architecture', 'african+house', 'traditional+african+home', 'africa+building'],
-    'contemporain':          ['contemporary+architecture', 'luxury+house', 'contemporary+home', 'elegant+architecture'],
-    'minimaliste':           ['minimalist+house', 'minimalist+architecture', 'minimal+home', 'clean+architecture'],
-    'colonial':              ['colonial+architecture', 'colonial+house', 'classic+architecture', 'heritage+building'],
-    'tropical':              ['tropical+house', 'tropical+villa', 'tropical+architecture', 'pool+villa']
+  // Images fixes par style — URLs stables hébergées sur images.unsplash.com
+  const IMAGES = {
+    'moderne': [
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80'
+    ],
+    'traditionnel africain': [
+      'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80',
+      'https://images.unsplash.com/photo-1580974852861-c381510bc98a?w=600&q=80',
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80',
+      'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80'
+    ],
+    'contemporain': [
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80',
+      'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80',
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80'
+    ],
+    'minimaliste': [
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&q=80',
+      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80',
+      'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=80',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'
+    ],
+    'colonial': [
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80',
+      'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80',
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80',
+      'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=80'
+    ],
+    'tropical': [
+      'https://images.unsplash.com/photo-1540541338537-1220059c3cca?w=600&q=80',
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80',
+      'https://images.unsplash.com/photo-1439130490301-25e322d88054?w=600&q=80',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80'
+    ]
   };
 
   function afficherImages(style) {
     const grid = document.getElementById('image-grid');
     const imageSection = document.getElementById('image-section');
-    const mots = styleImages[style] || styleImages['moderne'];
+    const urls = IMAGES[style] || IMAGES['moderne'];
     grid.innerHTML = '';
 
-    mots.forEach((mot, i) => {
+    urls.forEach(url => {
       const img = document.createElement('img');
-      img.src = `https://source.unsplash.com/400x300/?${mot}&sig=${Date.now()}${i}`;
-      img.alt = 'Référence architecturale';
-      img.onerror = () => { img.style.display = 'none'; };
+      img.src = url;
+      img.alt = 'Référence architecturale ' + style;
+      img.loading = 'lazy';
       grid.appendChild(img);
     });
 
@@ -326,13 +336,13 @@
   }
 
   async function generer() {
-    const prompt    = document.getElementById('prompt').value.trim();
+    const prompt     = document.getElementById('prompt').value.trim();
     const superficie = document.getElementById('superficie').value;
-    const style     = document.getElementById('style').value;
+    const style      = document.getElementById('style').value;
 
     if (!prompt) { alert('Veuillez décrire votre projet.'); return; }
 
-    const promptComplet = `${prompt}. Style : ${style}. ${superficie ? 'Superficie : ' + superficie + ' m².' : ''}`;
+    const promptComplet = `${prompt}. Style : ${style}.${superficie ? ' Superficie : ' + superficie + ' m².' : ''}`;
     lastPrompt = promptComplet;
 
     const btn          = document.getElementById('generateBtn');
@@ -347,7 +357,7 @@
     shareSection.style.display = 'none';
     pdfBtn.style.display = 'none';
 
-    // Afficher les images immédiatement (Unsplash = rapide)
+    // Afficher les images immédiatement
     afficherImages(style);
 
     try {
@@ -378,25 +388,26 @@
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.setFontSize(20);
+    doc.setFontSize(22);
     doc.setTextColor(15, 30, 80);
-    doc.text('ArchiAI - Plan Architectural', 20, 20);
+    doc.text('ArchiAI - Plan Architectural', 20, 22);
 
     doc.setFontSize(11);
-    doc.setTextColor(100);
-    doc.text('Projet : ' + lastPrompt, 20, 32);
-    doc.text('Genere le : ' + new Date().toLocaleDateString('fr-FR'), 20, 40);
+    doc.setTextColor(120);
+    doc.text('Projet : ' + lastPrompt, 20, 34);
+    doc.text('Genere le : ' + new Date().toLocaleDateString('fr-FR'), 20, 42);
 
     doc.setDrawColor(201, 168, 76);
-    doc.line(20, 46, 190, 46);
+    doc.setLineWidth(0.8);
+    doc.line(20, 48, 190, 48);
 
     doc.setFontSize(11);
     doc.setTextColor(30);
     const lines = doc.splitTextToSize(lastResult, 170);
-    doc.text(lines, 20, 56);
+    doc.text(lines, 20, 58);
 
     doc.setFontSize(9);
-    doc.setTextColor(150);
+    doc.setTextColor(160);
     doc.text('ArchiAI - Propulse par Groq IA', 20, 285);
 
     doc.save('plan-archi-ai.pdf');
