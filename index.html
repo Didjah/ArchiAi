@@ -19,100 +19,119 @@
     header {
       width: 100%;
       background: linear-gradient(135deg, #0d1530, #1a2a5e);
-      padding: 32px 20px;
+      padding: 30px 20px;
       text-align: center;
       border-bottom: 2px solid #c9a84c;
     }
-    header h1 { font-size: 2.4rem; color: #c9a84c; letter-spacing: 3px; text-transform: uppercase; }
-    header p { font-size: 1rem; color: #b0bcd4; margin-top: 8px; }
+    header h1 { font-size: 2.2rem; color: #c9a84c; letter-spacing: 3px; text-transform: uppercase; }
+    header p  { font-size: 0.95rem; color: #b0bcd4; margin-top: 6px; }
 
-    .container { width: 100%; max-width: 880px; padding: 36px 20px; }
+    .container { width: 100%; max-width: 900px; padding: 36px 20px 60px; }
 
     label {
-      display: block; font-size: 0.78rem; letter-spacing: 2px;
+      display: block; font-size: 0.75rem; letter-spacing: 2px;
       text-transform: uppercase; color: #c9a84c;
-      margin-bottom: 8px; margin-top: 18px;
+      margin-bottom: 7px; margin-top: 16px;
     }
     textarea, input[type="number"], select {
-      width: 100%; padding: 13px 15px;
+      width: 100%; padding: 12px 15px;
       background: #111827; border: 1px solid #c9a84c55;
       border-radius: 8px; color: #f0e6c8;
-      font-size: 1rem; font-family: 'Georgia', serif;
+      font-size: 0.97rem; font-family: 'Georgia', serif;
       outline: none; transition: border 0.3s;
     }
     textarea { resize: vertical; min-height: 90px; }
     textarea:focus, input:focus, select:focus { border-color: #c9a84c; }
     select option { background: #111827; }
-    .row { display: flex; gap: 14px; }
+    .row { display: flex; gap: 12px; }
     .row > div { flex: 1; }
 
-    button#generateBtn {
-      margin-top: 22px; width: 100%; padding: 16px;
+    #generateBtn {
+      margin-top: 20px; width: 100%; padding: 15px;
       background: linear-gradient(135deg, #c9a84c, #a07830);
-      color: #0a0f1e; font-size: 1.05rem; font-weight: bold;
+      color: #0a0f1e; font-size: 1rem; font-weight: bold;
       letter-spacing: 2px; text-transform: uppercase;
       border: none; border-radius: 8px; cursor: pointer;
       transition: opacity 0.3s;
     }
-    button#generateBtn:hover { opacity: 0.85; }
-    button#generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+    #generateBtn:hover { opacity: 0.85; }
+    #generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    #loader { display: none; text-align: center; margin-top: 22px; color: #c9a84c; font-size: 0.95rem; letter-spacing: 2px; }
+    #loader { display: none; text-align: center; margin-top: 20px; color: #c9a84c; font-size: 0.9rem; letter-spacing: 2px; }
 
     .section-title {
-      font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
-      color: #c9a84c; margin-bottom: 14px; margin-top: 32px;
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a84c; margin: 28px 0 12px;
       border-left: 3px solid #c9a84c; padding-left: 10px;
     }
 
-    /* PHOTOS */
+    /* IMAGE UNIQUE GRAND FORMAT */
     #image-section { display: none; }
-    .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .image-grid img {
-      width: 100%; height: 180px; object-fit: cover;
-      border-radius: 8px; border: 1px solid #c9a84c33; transition: transform 0.2s;
+    #ref-image {
+      width: 100%; height: 280px; object-fit: cover;
+      border-radius: 10px; border: 2px solid #c9a84c44;
+      display: block;
     }
-    .image-grid img:hover { transform: scale(1.02); }
+    .image-caption {
+      font-size: 0.75rem; color: #8a9ab4; text-align: center;
+      margin-top: 7px; font-style: italic;
+    }
 
-    /* PLAN 2D + VUE 3D côte à côte */
+    /* PLANS CÔTE À CÔTE */
     #plans-section { display: none; }
-    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .plan-box {
-      background: #fff; border-radius: 10px;
-      border: 2px solid #c9a84c; overflow: hidden;
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .plan-card {
+      border-radius: 10px; overflow: hidden;
+      border: 2px solid #c9a84c55;
+      background: #fff;
     }
-    .plan-box svg { width: 100%; height: auto; display: block; }
-    .plan-label {
+    .plan-card-label {
       background: #0d1530; color: #c9a84c;
-      font-size: 0.75rem; letter-spacing: 2px;
-      text-transform: uppercase; text-align: center;
-      padding: 7px;
+      font-size: 0.72rem; letter-spacing: 2px;
+      text-transform: uppercase; text-align: center; padding: 7px;
     }
+    .plan-card svg { width: 100%; height: auto; display: block; }
+
+    /* BOUTON NOUVEAU PLAN */
+    #nouveau-plan-btn {
+      display: none; margin-top: 14px; width: 100%;
+      padding: 13px; font-size: 0.92rem; font-weight: bold;
+      letter-spacing: 2px; text-transform: uppercase;
+      background: #0d1530; color: #c9a84c;
+      border: 1px dashed #c9a84c; border-radius: 8px;
+      cursor: pointer; transition: all 0.3s;
+    }
+    #nouveau-plan-btn:hover { background: #c9a84c22; }
 
     /* RÉSULTAT */
     #result {
       display: none; background: #111827;
-      border: 1px solid #c9a84c44; border-radius: 10px; padding: 26px;
+      border: 1px solid #c9a84c33; border-radius: 10px; padding: 24px;
     }
-    #result-text { color: #e8dfc8; white-space: pre-wrap; font-size: 0.96rem; line-height: 1.85; }
+    #result-text { color: #e8dfc8; white-space: pre-wrap; font-size: 0.95rem; line-height: 1.9; }
 
     /* BOUTONS ACTION */
-    .action-buttons { display: none; gap: 12px; margin-top: 14px; flex-direction: row; }
-    .action-buttons button {
-      flex: 1; padding: 13px; font-size: 0.88rem; font-weight: bold;
+    .action-row { display: none; gap: 10px; margin-top: 12px; }
+    .action-row button {
+      flex: 1; padding: 12px; font-size: 0.85rem; font-weight: bold;
       letter-spacing: 1px; text-transform: uppercase;
-      border-radius: 8px; cursor: pointer; transition: all 0.3s;
+      border-radius: 8px; cursor: pointer; transition: all 0.3s; border: none;
     }
-    #pdf-btn { background: #1a2a5e; color: #c9a84c; border: 1px solid #c9a84c; }
-    #pdf-btn:hover { background: #c9a84c; color: #0a0f1e; }
-    #plan-pdf-btn { background: #0d1a0d; color: #4caf50; border: 1px solid #4caf50; }
-    #plan-pdf-btn:hover { background: #4caf50; color: #fff; }
+    #pdf-texte-btn { background: #1a2a5e; color: #c9a84c; border: 1px solid #c9a84c; }
+    #pdf-texte-btn:hover { background: #c9a84c; color: #0a0f1e; }
+    #pdf-plans-btn { background: #0d1a0d; color: #4caf50; border: 1px solid #4caf50; }
+    #pdf-plans-btn:hover { background: #4caf50; color: #fff; }
 
     /* PARTAGE */
-    .share-section { margin-top: 14px; display: none; }
-    .share-label { font-size: 0.78rem; color: #c9a84c; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .share-section { display: none; margin-top: 12px; }
+    .share-label { font-size: 0.72rem; color: #c9a84c; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
     .share-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
-    .share-btn { padding: 9px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 0.82rem; font-weight: bold; color: white; transition: opacity 0.2s; }
+    .share-btn {
+      padding: 8px 13px; border-radius: 6px; border: none;
+      cursor: pointer; font-size: 0.8rem; font-weight: bold;
+      color: white; transition: opacity 0.2s;
+    }
     .share-btn:hover { opacity: 0.8; }
     .btn-whatsapp { background: #25D366; }
     .btn-telegram { background: #0088CC; }
@@ -121,12 +140,12 @@
     .btn-linkedin { background: #0077B5; }
     .btn-copy     { background: #c9a84c; color: #0a0f1e; }
 
-    footer { margin-top: 60px; padding: 20px; text-align: center; font-size: 0.75rem; color: #3a4a6a; }
+    footer { margin-top: 40px; padding: 16px; text-align: center; font-size: 0.72rem; color: #3a4a6a; }
 
-    @media (max-width: 600px) {
+    @media(max-width:600px){
       .plans-grid { grid-template-columns: 1fr; }
-      .image-grid { grid-template-columns: 1fr 1fr; }
-      .action-buttons { flex-direction: column; }
+      .action-row { flex-direction: column; }
+      #ref-image { height: 200px; }
     }
   </style>
 </head>
@@ -139,17 +158,17 @@
 
 <div class="container">
 
-  <label for="prompt">Décrivez votre projet</label>
-  <textarea id="prompt" placeholder="Ex : Villa avec 3 chambres, salon, cuisine ouverte, grande terrasse, piscine..."></textarea>
+  <label for="prompt">Décrivez votre projet en détail</label>
+  <textarea id="prompt" placeholder="Ex : Villa avec 3 chambres dont une suite parentale, grand salon ouvert sur la cuisine, terrasse couverte, piscine, jardin, 2 salles de bain..."></textarea>
 
   <div class="row">
     <div>
       <label for="superficie">Superficie (m²)</label>
-      <input type="number" id="superficie" placeholder="Ex : 150" min="30" max="10000" />
+      <input type="number" id="superficie" placeholder="Ex : 200" min="30" />
     </div>
     <div>
       <label for="pieces">Nombre de pièces</label>
-      <input type="number" id="pieces" placeholder="Ex : 5" min="1" max="20" />
+      <input type="number" id="pieces" placeholder="Ex : 6" min="1" max="20" />
     </div>
     <div>
       <label for="style">Style architectural</label>
@@ -167,37 +186,39 @@
   <button id="generateBtn" onclick="generer()">✦ Générer le plan architectural</button>
   <div id="loader">⏳ Génération en cours...</div>
 
-  <!-- PHOTOS -->
+  <!-- IMAGE RÉFÉRENCE (1 seule, grand format) -->
   <div id="image-section">
-    <div class="section-title">🖼️ Références visuelles du projet</div>
-    <div class="image-grid" id="image-grid"></div>
+    <div class="section-title">🖼️ Référence visuelle — Style {{ style }}</div>
+    <img id="ref-image" alt="Référence architecturale" />
+    <p class="image-caption">Référence visuelle du style sélectionné</p>
   </div>
 
   <!-- PLAN 2D + VUE 3D -->
   <div id="plans-section">
     <div class="section-title">📐 Vue en plan & Rendu 3D isométrique</div>
     <div class="plans-grid">
-      <div>
-        <div class="plan-label">📐 Plan 2D — Floor Plan</div>
-        <div class="plan-box" id="plan2d-container"></div>
+      <div class="plan-card">
+        <div class="plan-card-label">📐 Plan 2D — Floor Plan</div>
+        <div id="plan2d"></div>
       </div>
-      <div>
-        <div class="plan-label">🏠 Vue 3D Isométrique</div>
-        <div class="plan-box" id="plan3d-container"></div>
+      <div class="plan-card">
+        <div class="plan-card-label">🏠 Vue 3D Isométrique</div>
+        <div id="plan3d"></div>
       </div>
     </div>
+    <button id="nouveau-plan-btn" onclick="nouveauPlan()">🔄 Ce plan ne vous convient pas ? Générer une nouvelle proposition</button>
   </div>
 
-  <!-- TEXTE -->
+  <!-- TEXTE IA -->
   <div id="result">
-    <div class="section-title" style="margin-top:0">📋 Plan architectural généré</div>
+    <div class="section-title" style="margin-top:0">📋 Description architecturale</div>
     <div id="result-text"></div>
   </div>
 
   <!-- BOUTONS -->
-  <div class="action-buttons" id="action-buttons">
-    <button id="pdf-btn" onclick="telechargerPDF()">📄 Télécharger PDF</button>
-    <button id="plan-pdf-btn" onclick="telechargerPlanPDF()">📐 Télécharger Plans PDF</button>
+  <div class="action-row" id="action-row" style="display:flex">
+    <button id="pdf-texte-btn" onclick="telechargerPDF()">📄 PDF Description</button>
+    <button id="pdf-plans-btn" onclick="telechargerPlanPDF()">📐 PDF Plans</button>
   </div>
 
   <!-- PARTAGE -->
@@ -217,292 +238,293 @@
 <footer>ArchiAI — Propulsé par Groq IA</footer>
 
 <script>
-  let lastResult = '', lastPrompt = '';
+  let lastResult = '', lastPrompt = '', planVariante = 0;
+  let currentDesc = '', currentPieces = '', currentSuperficie = '', currentStyle = '';
 
-  // ── IMAGES PAR STYLE ─────────────────────────────────────────────────────────
-  const IMAGES = {
-    'moderne': [
-      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80',
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80'
-    ],
-    'traditionnel africain': [
-      'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80',
-      'https://images.unsplash.com/photo-1580974852861-c381510bc98a?w=600&q=80',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80',
-      'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80'
-    ],
-    'contemporain': [
-      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80',
-      'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80',
-      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80'
-    ],
-    'minimaliste': [
-      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&q=80',
-      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80',
-      'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=80',
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'
-    ],
-    'colonial': [
-      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80',
-      'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80',
-      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80',
-      'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=80'
-    ],
-    'tropical': [
-      'https://images.unsplash.com/photo-1540541338537-1220059c3cca?w=600&q=80',
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80',
-      'https://images.unsplash.com/photo-1439130490301-25e322d88054?w=600&q=80',
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80'
-    ]
+  // ── IMAGE PAR STYLE (1 seule, meilleure image) ──────────────────────────────
+  const IMAGE_REF = {
+    'moderne':               'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85',
+    'traditionnel africain': 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=900&q=85',
+    'contemporain':          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&q=85',
+    'minimaliste':           'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900&q=85',
+    'colonial':              'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=85',
+    'tropical':              'https://images.unsplash.com/photo-1540541338537-1220059c3cca?w=900&q=85'
   };
 
   // ── COULEURS PAR STYLE ───────────────────────────────────────────────────────
-  const COULEURS = {
-    'moderne':               { mur:'#1a1a2e', fond:'#e8f4f8', accent:'#4fc3f7', toit:'#1a1a2e', facade:'#b0c4de', ombre:'#8fa8c8' },
-    'traditionnel africain': { mur:'#3e2723', fond:'#fff8e1', accent:'#ff8f00', toit:'#5d4037', facade:'#d7b896', ombre:'#a07850' },
-    'contemporain':          { mur:'#212121', fond:'#f5f5f5', accent:'#78909c', toit:'#37474f', facade:'#cfd8dc', ombre:'#90a4ae' },
-    'minimaliste':           { mur:'#424242', fond:'#fafafa', accent:'#bdbdbd', toit:'#616161', facade:'#eeeeee', ombre:'#bdbdbd' },
-    'colonial':              { mur:'#4e342e', fond:'#efebe9', accent:'#8d6e63', toit:'#6d4c41', facade:'#d7ccc8', ombre:'#a1887f' },
-    'tropical':              { mur:'#1b5e20', fond:'#f1f8e9', accent:'#66bb6a', toit:'#2e7d32', facade:'#c8e6c9', ombre:'#81c784' }
+  const C = {
+    'moderne':               { mur:'#1a1a2e', fond:'#e8f4f8', accent:'#4fc3f7', toit:'#1a1a2e', facade:'#b0c4de', ombre:'#8fa8c8', sol:'#c8d8c0' },
+    'traditionnel africain': { mur:'#3e2723', fond:'#fff8e1', accent:'#ff8f00', toit:'#5d4037', facade:'#d7b896', ombre:'#a07850', sol:'#d4b896' },
+    'contemporain':          { mur:'#212121', fond:'#f5f5f5', accent:'#78909c', toit:'#37474f', facade:'#cfd8dc', ombre:'#90a4ae', sol:'#c8d4b0' },
+    'minimaliste':           { mur:'#424242', fond:'#fafafa', accent:'#bdbdbd', toit:'#616161', facade:'#eeeeee', ombre:'#bdbdbd', sol:'#d4d8c8' },
+    'colonial':              { mur:'#4e342e', fond:'#efebe9', accent:'#8d6e63', toit:'#6d4c41', facade:'#d7ccc8', ombre:'#a1887f', sol:'#c8b890' },
+    'tropical':              { mur:'#1b5e20', fond:'#f1f8e9', accent:'#66bb6a', toit:'#2e7d32', facade:'#c8e6c9', ombre:'#81c784', sol:'#a8d890' }
   };
 
-  // ── PLAN 2D SVG ──────────────────────────────────────────────────────────────
-  function genererPlan2D(desc, nbPieces, superficie, style) {
-    const W = 420, H = 360, mu = 6;
+  // ── ANALYSER LA DESCRIPTION ──────────────────────────────────────────────────
+  function analyser(desc) {
     const d = desc.toLowerCase();
-    const aPiscine = d.includes('piscine'), aTerrasse = d.includes('terrasse'), aGarage = d.includes('garage');
-    const n = Math.max(2, Math.min(parseInt(nbPieces)||4, 5));
-    const c = COULEURS[style] || COULEURS['moderne'];
+    return {
+      piscine:       d.includes('piscine'),
+      terrasse:      d.includes('terrasse'),
+      garage:        d.includes('garage'),
+      bureau:        d.includes('bureau'),
+      suiteParentale:d.includes('suite') || d.includes('parentale'),
+      cuisine:       d.includes('cuisine'),
+      salon:         d.includes('salon') || d.includes('séjour') || d.includes('sejour'),
+      sdb:           d.includes('salle de bain') || d.includes('sdb') || d.includes('douche'),
+      jardin:        d.includes('jardin'),
+      veranda:       d.includes('véranda') || d.includes('veranda'),
+      buanderie:     d.includes('buanderie'),
+      patio:         d.includes('patio'),
+    };
+  }
+
+  // ── PLAN 2D ──────────────────────────────────────────────────────────────────
+  function genPlan2D(desc, nbP, sup, style, variante) {
+    const W = 440, H = 380;
+    const c = C[style] || C['moderne'];
+    const f = analyser(desc);
+    const n = Math.max(2, Math.min(parseInt(nbP)||4, 6));
+    const v = variante % 3; // 3 variantes de disposition
 
     let s = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">`;
     s += `<rect width="${W}" height="${H}" fill="#f9f7f2"/>`;
-    s += `<text x="${W/2}" y="18" text-anchor="middle" font-size="10" font-weight="bold" fill="${c.mur}" letter-spacing="1">PLAN 2D — FLOOR PLAN</text>`;
+    s += `<text x="${W/2}" y="16" text-anchor="middle" font-size="9" font-weight="bold" fill="${c.mur}" letter-spacing="1.5">PLAN 2D${v>0?' — VARIANTE '+v:''}</text>`;
 
-    const bx=30, by=28, bw=260, bh=230;
-    s += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${c.fond}" stroke="${c.mur}" stroke-width="${mu}" rx="3"/>`;
+    // Dimensions bâtiment selon variante
+    const configs = [
+      {bx:30, by:24, bw:270, bh:240},  // Standard
+      {bx:30, by:24, bw:240, bh:270},  // Plus haut
+      {bx:20, by:24, bw:290, bh:220},  // Plus large
+    ];
+    const {bx,by,bw,bh} = configs[v];
 
-    // Salon gauche haut
-    const sW=Math.round(bw*0.48), sH=Math.round(bh*0.55);
-    s += piece(bx, by, sW, sH, 'SALON', c, mu, true);
+    // Structure principale
+    s += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${c.fond}" stroke="${c.mur}" stroke-width="6" rx="2"/>`;
 
-    // Cuisine gauche bas
-    s += piece(bx, by+sH, sW, bh-sH, 'CUISINE', c, mu);
+    // ── Pièces selon description et variante ──────────────────────────────
+    if(v === 0) {
+      // Variante 0 : Salon gauche haut, cuisine gauche bas, chambres droite
+      const sW = Math.round(bw*0.46), sH = Math.round(bh*0.52);
+      s += salle(bx, by, sW, sH, f.salon?'SALON / SÉJOUR':'SALLE COMMUNE', c, true);
+      s += salle(bx, by+sH, sW, bh-sH, f.cuisine?'CUISINE':'ESPACE REPAS', c, false);
+      const rX=bx+sW, rW=bw-sW;
+      const nbCh = Math.max(1, n-2);
+      for(let i=0;i<nbCh;i++){
+        const ch=Math.round(bh/nbCh);
+        const cy=by+i*ch, cH=(i===nbCh-1)?(by+bh-cy):ch;
+        const lbl = i===0&&f.suiteParentale?'SUITE PARENTALE':`CHAMBRE ${i+1}`;
+        s += salle(rX,cy,rW,cH,lbl,c,i===0);
+        s += sdb(rX+rW-Math.round(rW*0.38), cy+cH-Math.round(cH*0.38), Math.round(rW*0.38), Math.round(cH*0.38), c);
+      }
+    } else if(v === 1) {
+      // Variante 1 : Couloir central
+      const coulW=22, rW=(bw-coulW)/2;
+      s += `<rect x="${bx+rW}" y="${by}" width="${coulW}" height="${bh}" fill="#e8e8e8" stroke="${c.mur}" stroke-width="3"/>`;
+      s += `<text x="${bx+rW+coulW/2}" y="${by+bh/2}" text-anchor="middle" font-size="7" fill="${c.mur}" transform="rotate(-90,${bx+rW+coulW/2},${by+bh/2})">COULOIR</text>`;
+      const nbCh=Math.max(1,n-2), chH=Math.round(bh/nbCh);
+      for(let i=0;i<nbCh;i++){
+        const cy=by+i*chH, cH=(i===nbCh-1)?(by+bh-cy):chH;
+        const lbl=i===0&&f.suiteParentale?'SUITE PARENTALE':`CHAMBRE ${i+1}`;
+        s += salle(bx,cy,Math.round(rW),cH,lbl,c,i===0);
+        s += salle(bx+rW+coulW,cy,Math.round(rW),cH,i===0?(f.salon?'SALON':'SEJOUR'):(f.cuisine&&i===1?'CUISINE':'PIECE '+(i+1)),c,i===0);
+      }
+    } else {
+      // Variante 2 : Open space + aile chambres
+      const sH=Math.round(bh*0.45);
+      s += salle(bx,by,bw,sH,f.salon?'GRAND SALON OUVERT':'ESPACE DE VIE', c, true);
+      if(f.cuisine) {
+        const cW=Math.round(bw*0.38);
+        s += salle(bx+bw-cW,by+sH,cW,Math.round(bh*0.3),'CUISINE',c,false);
+      }
+      const chY=by+sH, chH=bh-sH, nbCh=Math.max(1,n-2);
+      const chW=Math.round((bw*(f.cuisine?0.62:1))/nbCh);
+      for(let i=0;i<nbCh;i++){
+        const lbl=i===0&&f.suiteParentale?'SUITE PARENTALE':`CHAMBRE ${i+1}`;
+        s += salle(bx+i*chW,chY,chW,chH,lbl,c,i===0);
+        s += sdb(bx+i*chW+chW-Math.round(chW*0.4),chY+chH-Math.round(chH*0.4),Math.round(chW*0.4),Math.round(chH*0.4),c);
+      }
+    }
 
-    // Chambres droite
-    const rX=bx+sW, rW=bw-sW;
-    for(let i=0;i<n-2;i++){
-      const ch=Math.round(bh/(n-2));
-      const cy=by+i*ch;
-      const cH=(i===n-3)?(by+bh-cy):ch;
-      s += piece(rX, cy, rW, cH, i===0?'CH. PRINCIPALE':`CH. ${i+1}`, c, mu, i===0);
-      // SDB
-      const sbW=Math.round(rW*0.36), sbH=Math.round(cH*0.4);
-      s += `<rect x="${rX+rW-sbW}" y="${cy+cH-sbH}" width="${sbW}" height="${sbH}" fill="#ddeeff" stroke="${c.mur}" stroke-width="2"/>`;
-      s += `<text x="${rX+rW-sbW/2}" y="${cy+cH-sbH/2+3}" text-anchor="middle" font-size="7" fill="${c.mur}">SDB</text>`;
+    // Bureau
+    if(f.bureau){
+      const buX=bx+bw+6, buY=by, buW=55, buH=65;
+      s += salle(buX,buY,buW,buH,'BUREAU',c,false);
     }
 
     // Terrasse
-    if(aTerrasse){
-      s += `<rect x="${bx}" y="${by+bh}" width="${Math.round(bw*0.6)}" height="40" fill="#ffe0b2" stroke="${c.mur}" stroke-width="3" stroke-dasharray="5,3"/>`;
-      s += `<text x="${bx+Math.round(bw*0.3)}" y="${by+bh+24}" text-anchor="middle" font-size="9" fill="${c.mur}" font-weight="bold">TERRASSE</text>`;
+    if(f.terrasse){
+      const tW=Math.round(bw*(v===2?0.7:0.55)), tH=42;
+      s += `<rect x="${bx}" y="${by+bh}" width="${tW}" height="${tH}" fill="#ffe0b2" stroke="${c.mur}" stroke-width="3" stroke-dasharray="5,3"/>`;
+      s += `<text x="${bx+tW/2}" y="${by+bh+25}" text-anchor="middle" font-size="9" font-weight="bold" fill="${c.mur}">TERRASSE</text>`;
     }
 
     // Piscine
-    if(aPiscine){
-      const px=bx+(aTerrasse?Math.round(bw*0.62):0), py=by+bh+5;
-      s += `<rect x="${px}" y="${py}" width="90" height="38" fill="#b3e5fc" stroke="#0288d1" stroke-width="2" rx="15"/>`;
-      s += `<text x="${px+45}" y="${py+22}" text-anchor="middle" font-size="8" fill="#0288d1" font-weight="bold">PISCINE</text>`;
+    if(f.piscine){
+      const px=bx+(f.terrasse?Math.round(bw*0.57):0), py=by+bh+(f.terrasse?4:6);
+      const pw=100, ph=36;
+      s += `<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="#81d4fa" stroke="#0288d1" stroke-width="2" rx="14"/>`;
+      for(let w=0;w<3;w++) s += `<path d="M${px+10+w*28},${py+20} q7,-6 14,0 q7,6 14,0" fill="none" stroke="#4fc3f7" stroke-width="1.2"/>`;
+      s += `<text x="${px+pw/2}" y="${py+ph/2+4}" text-anchor="middle" font-size="8" fill="#0277bd" font-weight="bold">PISCINE</text>`;
     }
 
     // Garage
-    if(aGarage){
-      s += `<rect x="${bx+bw+8}" y="${by}" width="68" height="80" fill="#e0e0e0" stroke="${c.mur}" stroke-width="3"/>`;
-      s += `<text x="${bx+bw+42}" y="${by+45}" text-anchor="middle" font-size="8" fill="${c.mur}" font-weight="bold">GARAGE</text>`;
+    if(f.garage){
+      const gx=bx+bw+(f.bureau?64:6), gy=by, gw=62, gh=80;
+      s += `<rect x="${gx}" y="${gy}" width="${gw}" height="${gh}" fill="#e0e0e0" stroke="${c.mur}" stroke-width="3"/>`;
+      s += `<rect x="${gx+6}" y="${gy+gh-18}" width="${gw-12}" height="13" fill="#bdbdbd" stroke="${c.mur}" stroke-width="1.5"/>`;
+      s += `<text x="${gx+gw/2}" y="${gy+gh/2+4}" text-anchor="middle" font-size="8" fill="${c.mur}" font-weight="bold">GARAGE</text>`;
     }
 
-    // Nord + échelle
-    s += `<text x="${W-22}" y="40" text-anchor="middle" font-size="16" fill="${c.mur}">↑</text>`;
-    s += `<text x="${W-22}" y="54" text-anchor="middle" font-size="8" fill="${c.mur}" font-weight="bold">N</text>`;
-    if(superficie) s += `<text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="8" fill="#888">Superficie : ${superficie} m²</text>`;
+    // Nord + superficie
+    s += `<text x="${W-18}" y="36" text-anchor="middle" font-size="14" fill="${c.mur}">↑</text>`;
+    s += `<text x="${W-18}" y="50" text-anchor="middle" font-size="8" font-weight="bold" fill="${c.mur}">N</text>`;
+    if(sup) s += `<text x="${W/2}" y="${H-4}" text-anchor="middle" font-size="8" fill="#888">Superficie : ${sup} m²</text>`;
 
     s += `</svg>`;
     return s;
   }
 
-  function piece(x, y, w, h, label, c, mu, principale) {
-    let s = `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${principale?c.fond:'#fff'}" stroke="${c.mur}" stroke-width="${mu}"/>`;
-    const pt = 22;
-    s += `<line x1="${x+pt}" y1="${y+h}" x2="${x+pt}" y2="${y+h-pt}" stroke="${c.mur}" stroke-width="1.5"/>`;
-    s += `<path d="M${x},${y+h} a${pt},${pt} 0 0,1 ${pt},${-pt}" fill="none" stroke="${c.accent}" stroke-width="1.2"/>`;
-    s += `<text x="${x+w/2}" y="${y+h/2+4}" text-anchor="middle" font-size="9" font-weight="bold" fill="${c.mur}">${label}</text>`;
+  function salle(x,y,w,h,label,c,principale){
+    let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${principale?c.fond:'#fff'}" stroke="${c.mur}" stroke-width="5"/>`;
+    const pt=20;
+    s+=`<path d="M${x},${y+h} a${pt},${pt} 0 0,1 ${pt},${-pt}" fill="none" stroke="${c.accent}" stroke-width="1.3"/>`;
+    s+=`<line x1="${x+pt}" y1="${y+h}" x2="${x+pt}" y2="${y+h-pt}" stroke="${c.mur}" stroke-width="1.5"/>`;
+    if(w>70&&h>40) s+=`<text x="${x+w/2}" y="${y+h/2+4}" text-anchor="middle" font-size="${w>100?9:7}" font-weight="bold" fill="${c.mur}">${label}</text>`;
     return s;
   }
 
-  // ── VUE 3D ISOMÉTRIQUE SVG ───────────────────────────────────────────────────
-  function genererVue3D(desc, nbPieces, superficie, style) {
-    const W = 420, H = 360;
-    const d = desc.toLowerCase();
-    const aPiscine  = d.includes('piscine');
-    const aTerrasse = d.includes('terrasse');
-    const aGarage   = d.includes('garage');
-    const n = Math.max(2, Math.min(parseInt(nbPieces)||4, 5));
-    const c = COULEURS[style] || COULEURS['moderne'];
+  function sdb(x,y,w,h,c){
+    let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#ddeeff" stroke="${c.mur}" stroke-width="2"/>`;
+    s+=`<ellipse cx="${x+w/2}" cy="${y+h*0.38}" rx="${w*0.32}" ry="${h*0.22}" fill="none" stroke="${c.accent}" stroke-width="1.5"/>`;
+    s+=`<text x="${x+w/2}" y="${y+h*0.78}" text-anchor="middle" font-size="7" fill="${c.mur}">SDB</text>`;
+    return s;
+  }
 
-    // Transformation isométrique
-    function iso(gx, gy, gz) {
-      return {
-        x: W/2 + (gx - gy) * 28,
-        y: H/2 + (gx + gy) * 14 - gz * 26
-      };
+  // ── VUE 3D ISOMÉTRIQUE ───────────────────────────────────────────────────────
+  function genVue3D(desc, nbP, sup, style, variante) {
+    const W=440, H=380;
+    const c = C[style]||C['moderne'];
+    const f = analyser(desc);
+    const v = variante % 3;
+
+    function iso(gx,gy,gz){ return { x: W/2+(gx-gy)*26, y: H/2+(gx+gy)*13-gz*24 }; }
+    function quad(pts,fill,stroke,sw=1){
+      return `<path d="${pts.map((p,i)=>(i===0?'M':'L')+p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+    }
+    function wall(x1,y1,x2,y2,h,fill,stroke){ return quad([iso(x1,y1,0),iso(x2,y2,0),iso(x2,y2,h),iso(x1,y1,h)],fill,stroke,1.3); }
+
+    let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">`;
+    s+=`<rect width="${W}" height="${H}" fill="#eef2f6"/>`;
+    s+=`<text x="${W/2}" y="16" text-anchor="middle" font-size="9" font-weight="bold" fill="${c.mur}" letter-spacing="1.5">VUE 3D${v>0?' — VARIANTE '+v:''}</text>`;
+
+    // Terrain / jardin
+    s += quad([iso(-1,-1,0),iso(7,-1,0),iso(7,6,0),iso(-1,6,0)], c.sol, '#8a9a70', 1);
+    if(f.jardin){
+      s += quad([iso(-0.5,-0.5,0),iso(0.8,-0.5,0),iso(0.8,5.5,0),iso(-0.5,5.5,0)], '#b8e090', '#7ab050', 0.8);
     }
 
-    function quad(pts, fill, stroke, sw=1) {
-      const d = pts.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')+'Z';
-      return `<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
-    }
+    // Dimensions bâtiment selon variante
+    const dims = [{x0:0.3,y0:0.3,x1:4.8,y1:3.8,mH:1.7},{x0:0.4,y0:0.3,x1:4.4,y1:4.2,mH:1.9},{x0:0.2,y0:0.4,x1:5.0,y1:3.6,mH:1.6}];
+    const {x0,y0,x1,y1,mH}=dims[v];
 
-    let s = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">`;
-    s += `<rect width="${W}" height="${H}" fill="#f0f4f8"/>`;
-    s += `<text x="${W/2}" y="18" text-anchor="middle" font-size="10" font-weight="bold" fill="${c.mur}" letter-spacing="1">VUE 3D ISOMÉTRIQUE</text>`;
+    // Sol bâtiment
+    s += quad([iso(x0,y0,0),iso(x1,y0,0),iso(x1,y1,0),iso(x0,y1,0)], c.fond, c.mur, 1);
 
-    // Sol / terrain
-    const solPts = [iso(0,0,0), iso(6,0,0), iso(6,5,0), iso(0,5,0)];
-    s += quad(solPts, '#d4e8a0', '#a0c060', 1);
+    // Murs
+    s += wall(x0,y1,x1,y1,mH,c.facade,c.mur); // avant
+    s += wall(x1,y0,x1,y1,mH,c.ombre,c.mur);  // droite
+    s += wall(x0,y0,x1,y0,mH,c.facade+'99',c.mur); // arrière
+    s += wall(x0,y0,x0,y1,mH,c.ombre+'99',c.mur);  // gauche
 
-    // ── Corps principal de la maison ─────────────────────────────────────────
-    const mH = 1.6; // hauteur murs
-    // Face sol
-    const basePts = [iso(0.5,0.5,0), iso(4.5,0.5,0), iso(4.5,3.5,0), iso(0.5,3.5,0)];
-    s += quad(basePts, c.fond, c.mur, 1);
-
-    // Face avant (sud)
-    const fAvant = [iso(0.5,3.5,0), iso(4.5,3.5,0), iso(4.5,3.5,mH), iso(0.5,3.5,mH)];
-    s += quad(fAvant, c.facade, c.mur, 1.5);
-
-    // Face droite (est)
-    const fDroite = [iso(4.5,0.5,0), iso(4.5,3.5,0), iso(4.5,3.5,mH), iso(4.5,0.5,mH)];
-    s += quad(fDroite, c.ombre, c.mur, 1.5);
-
-    // ── Toit ─────────────────────────────────────────────────────────────────
-    if(style === 'traditionnel africain' || style === 'tropical') {
-      // Toit à 4 pans
-      const apex = iso(2.5, 2, mH+1.4);
-      [[iso(0.5,0.5,mH),iso(4.5,0.5,mH)],[iso(4.5,0.5,mH),iso(4.5,3.5,mH)],
-       [iso(4.5,3.5,mH),iso(0.5,3.5,mH)],[iso(0.5,3.5,mH),iso(0.5,0.5,mH)]].forEach((edge,i) => {
-        const col = i<2 ? c.toit : (i===2 ? '#8d6e63' : c.ombre);
-        s += `<path d="M${edge[0].x.toFixed(1)},${edge[0].y.toFixed(1)} L${apex.x.toFixed(1)},${apex.y.toFixed(1)} L${edge[1].x.toFixed(1)},${edge[1].y.toFixed(1)} Z" fill="${col}" stroke="${c.mur}" stroke-width="1.2"/>`;
-      });
+    // Toit selon style
+    if(['traditionnel africain','tropical','colonial'].includes(style)){
+      // Toit à 4 pans avec débord
+      const mx=(x0+x1)/2, my=(y0+y1)/2, apex=iso(mx,my,mH+1.5);
+      const coins=[[x0-0.15,y0-0.15],[x1+0.15,y0-0.15],[x1+0.15,y1+0.15],[x0-0.15,y1+0.15]];
+      const toitCols=[c.toit,c.ombre,c.toit+'cc',c.ombre+'cc'];
+      for(let i=0;i<4;i++){
+        const a=coins[i], b=coins[(i+1)%4];
+        s+=`<path d="M${iso(a[0],a[1],mH).x.toFixed(1)},${iso(a[0],a[1],mH).y.toFixed(1)} L${apex.x.toFixed(1)},${apex.y.toFixed(1)} L${iso(b[0],b[1],mH).x.toFixed(1)},${iso(b[0],b[1],mH).y.toFixed(1)} Z" fill="${toitCols[i]}" stroke="${c.mur}" stroke-width="1.2"/>`;
+      }
     } else {
-      // Toit plat avec débord
-      const toitTop = [iso(0.2,0.2,mH), iso(4.8,0.2,mH), iso(4.8,3.8,mH), iso(0.2,3.8,mH)];
-      s += quad(toitTop, c.toit, c.mur, 1.5);
-      // Bordure toit
-      const toitBot = [iso(0.5,0.5,mH), iso(4.5,0.5,mH), iso(4.5,3.5,mH), iso(0.5,3.5,mH)];
-      const bordH = 0.15;
-      [
-        [iso(0.2,3.8,mH),iso(4.8,3.8,mH),iso(4.8,3.8,mH-bordH),iso(0.2,3.8,mH-bordH)],
-        [iso(4.8,0.2,mH),iso(4.8,3.8,mH),iso(4.8,3.8,mH-bordH),iso(4.8,0.2,mH-bordH)]
-      ].forEach(pts => s += quad(pts, c.ombre, c.mur, 1));
+      // Toit plat avec acrotère
+      s += quad([iso(x0-0.12,y0-0.12,mH),iso(x1+0.12,y0-0.12,mH),iso(x1+0.12,y1+0.12,mH),iso(x0-0.12,y1+0.12,mH)],c.toit,c.mur,1.5);
+      // Acrotère avant
+      s += wall(x0-0.12,y1+0.12,x1+0.12,y1+0.12,0.15,c.facade,c.mur);
+      s += wall(x1+0.12,y0-0.12,x1+0.12,y1+0.12,0.15,c.ombre,c.mur);
     }
 
-    // ── Fenêtres façade avant ────────────────────────────────────────────────
-    for(let i=0;i<Math.min(n-1,3);i++){
-      const wx = 0.8 + i*1.2, wy = 3.5, wz0 = 0.5, wz1 = 1.1;
-      if(wx < 4.2) {
-        const fenPts = [iso(wx,wy,wz0), iso(wx+0.7,wy,wz0), iso(wx+0.7,wy,wz1), iso(wx,wy,wz1)];
-        s += quad(fenPts, '#b3d9f7', c.mur, 1);
-        const mfx = iso(wx+0.35, wy, (wz0+wz1)/2);
-        s += `<line x1="${iso(wx,wy,(wz0+wz1)/2).x.toFixed(1)}" y1="${iso(wx,wy,(wz0+wz1)/2).y.toFixed(1)}" x2="${iso(wx+0.7,wy,(wz0+wz1)/2).x.toFixed(1)}" y2="${iso(wx+0.7,wy,(wz0+wz1)/2).y.toFixed(1)}" stroke="${c.mur}" stroke-width="0.8"/>`;
-        s += `<line x1="${mfx.x.toFixed(1)}" y1="${iso(wx+0.35,wy,wz0).y.toFixed(1)}" x2="${mfx.x.toFixed(1)}" y2="${iso(wx+0.35,wy,wz1).y.toFixed(1)}" stroke="${c.mur}" stroke-width="0.8"/>`;
+    // Fenêtres façade avant (adaptées au nb de pièces)
+    const nbFen=Math.min(parseInt(nbP)||3,4);
+    for(let i=0;i<nbFen;i++){
+      const fx=x0+0.5+i*((x1-x0-1)/Math.max(nbFen-1,1));
+      if(fx<x1-0.5){
+        s += quad([iso(fx,y1,0.45),iso(fx+0.55,y1,0.45),iso(fx+0.55,y1,1.05),iso(fx,y1,1.05)],'#b3d9f7',c.mur,1);
+        const mc=iso(fx+0.275,y1,0.75);
+        s += `<line x1="${iso(fx,y1,0.75).x.toFixed(1)}" y1="${iso(fx,y1,0.75).y.toFixed(1)}" x2="${iso(fx+0.55,y1,0.75).x.toFixed(1)}" y2="${iso(fx+0.55,y1,0.75).y.toFixed(1)}" stroke="${c.mur}" stroke-width="0.8"/>`;
+        s += `<line x1="${mc.x.toFixed(1)}" y1="${iso(fx+0.275,y1,0.45).y.toFixed(1)}" x2="${mc.x.toFixed(1)}" y2="${iso(fx+0.275,y1,1.05).y.toFixed(1)}" stroke="${c.mur}" stroke-width="0.8"/>`;
       }
     }
 
-    // ── Porte ────────────────────────────────────────────────────────────────
-    const portePts = [iso(1.9,3.5,0), iso(2.7,3.5,0), iso(2.7,3.5,1.0), iso(1.9,3.5,1.0)];
-    s += quad(portePts, '#8d6e63', c.mur, 1.5);
-    const pc = iso(2.3, 3.5, 0.5);
-    s += `<circle cx="${pc.x.toFixed(1)}" cy="${pc.y.toFixed(1)}" r="3" fill="${c.accent}"/>`;
+    // Porte principale
+    const portX=(x0+x1)/2-0.35;
+    s += quad([iso(portX,y1,0),iso(portX+0.7,y1,0),iso(portX+0.7,y1,1.0),iso(portX,y1,1.0)],'#8d6e63',c.mur,1.5);
+    const ph=iso(portX+0.35,y1,0.5);
+    s += `<circle cx="${ph.x.toFixed(1)}" cy="${ph.y.toFixed(1)}" r="3" fill="${c.accent}"/>`;
 
-    // ── Terrasse ─────────────────────────────────────────────────────────────
-    if(aTerrasse){
-      const tPts = [iso(0.5,3.5,0.05), iso(3.5,3.5,0.05), iso(3.5,5,0.05), iso(0.5,5,0.05)];
-      s += quad(tPts, '#ffe0b2', '#c9a84c', 1.5);
-      // Rambarde terrasse
-      [[iso(0.5,3.5,0.05),iso(0.5,5,0.05)],[iso(3.5,3.5,0.05),iso(3.5,5,0.05)]].forEach(edge => {
-        const h=0.5;
-        s += `<line x1="${edge[0].x.toFixed(1)}" y1="${(edge[0].y-h*26).toFixed(1)}" x2="${edge[1].x.toFixed(1)}" y2="${(edge[1].y-h*26).toFixed(1)}" stroke="${c.accent}" stroke-width="1.5"/>`;
-        s += `<line x1="${edge[0].x.toFixed(1)}" y1="${edge[0].y.toFixed(1)}" x2="${edge[0].x.toFixed(1)}" y2="${(edge[0].y-h*26).toFixed(1)}" stroke="${c.accent}" stroke-width="1.2"/>`;
+    // Terrasse
+    if(f.terrasse){
+      const tX1=x0, tX2=x0+(x1-x0)*0.6, tY=y1, tY2=y1+1.2;
+      s += quad([iso(tX1,tY,0.05),iso(tX2,tY,0.05),iso(tX2,tY2,0.05),iso(tX1,tY2,0.05)],'#ffe0b2','#c9a84c',1.5);
+      // Colonnes terrasse
+      [[tX1+0.1,tY2],[tX2-0.1,tY2],[tX1+0.1,tY],[tX2-0.1,tY]].forEach(([cx,cy])=>{
+        const b=iso(cx,cy,0.05), t=iso(cx,cy,mH*0.6);
+        s+=`<line x1="${b.x.toFixed(1)}" y1="${b.y.toFixed(1)}" x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}" stroke="${c.accent}" stroke-width="3"/>`;
       });
-      const tLabel = iso(2, 4.2, 0.1);
-      s += `<text x="${tLabel.x.toFixed(1)}" y="${tLabel.y.toFixed(1)}" text-anchor="middle" font-size="8" fill="${c.mur}" font-weight="bold">TERRASSE</text>`;
+      const tl=iso((tX1+tX2)/2,(tY+tY2)/2,0.12);
+      s+=`<text x="${tl.x.toFixed(1)}" y="${tl.y.toFixed(1)}" text-anchor="middle" font-size="8" fill="${c.mur}" font-weight="bold">TERRASSE</text>`;
     }
 
-    // ── Piscine ───────────────────────────────────────────────────────────────
-    if(aPiscine){
-      const pPts = [iso(aTerrasse?3.8:0.5, 3.8, 0), iso(5.5, 3.8, 0), iso(5.5, 4.8, 0), iso(aTerrasse?3.8:0.5, 4.8, 0)];
-      s += quad(pPts, '#81d4fa', '#0288d1', 2);
-      // Eau (vagues)
+    // Piscine
+    if(f.piscine){
+      const px=f.terrasse?x0+(x1-x0)*0.62:x0, py=y1+(f.terrasse?0.1:0.3);
+      s += quad([iso(px,py,0),iso(px+1.8,py,0),iso(px+1.8,py+1.0,0),iso(px,py+1.0,0)],'#81d4fa','#0288d1',2);
       for(let w=0;w<3;w++){
-        const w1 = iso(aTerrasse?4.1+w*0.4:0.8+w*0.4, 4.1, 0.02);
-        const w2 = iso(aTerrasse?4.3+w*0.4:1.0+w*0.4, 4.3, 0.02);
-        s += `<line x1="${w1.x.toFixed(1)}" y1="${w1.y.toFixed(1)}" x2="${w2.x.toFixed(1)}" y2="${w2.y.toFixed(1)}" stroke="#4fc3f7" stroke-width="1.5"/>`;
+        const w1=iso(px+0.2+w*0.5,py+0.5,0.02), w2=iso(px+0.5+w*0.5,py+0.7,0.02);
+        s+=`<line x1="${w1.x.toFixed(1)}" y1="${w1.y.toFixed(1)}" x2="${w2.x.toFixed(1)}" y2="${w2.y.toFixed(1)}" stroke="#4fc3f7" stroke-width="1.5"/>`;
       }
-      const pc2 = iso(aTerrasse?4.65:1.5, 4.3, 0.05);
-      s += `<text x="${pc2.x.toFixed(1)}" y="${pc2.y.toFixed(1)}" text-anchor="middle" font-size="8" fill="#0277bd" font-weight="bold">PISCINE</text>`;
+      const pl=iso(px+0.9,py+0.5,0.06);
+      s+=`<text x="${pl.x.toFixed(1)}" y="${pl.y.toFixed(1)}" text-anchor="middle" font-size="8" fill="#0277bd" font-weight="bold">PISCINE</text>`;
     }
 
-    // ── Garage ────────────────────────────────────────────────────────────────
-    if(aGarage){
-      const gH = 1.2;
-      const gAvant = [iso(4.5,0.5,0), iso(5.8,0.5,0), iso(5.8,2,0), iso(4.5,2,0)];
-      s += quad(gAvant, c.fond, c.mur, 1);
-      const gFaceAv = [iso(4.5,2,0), iso(5.8,2,0), iso(5.8,2,gH), iso(4.5,2,gH)];
-      s += quad(gFaceAv, c.facade, c.mur, 1.2);
-      const gFaceDr = [iso(5.8,0.5,0), iso(5.8,2,0), iso(5.8,2,gH), iso(5.8,0.5,gH)];
-      s += quad(gFaceDr, c.ombre, c.mur, 1.2);
-      const gToit = [iso(4.4,0.4,gH), iso(5.9,0.4,gH), iso(5.9,2.1,gH), iso(4.4,2.1,gH)];
-      s += quad(gToit, c.toit, c.mur, 1);
-      // Porte garage
-      const gpPts = [iso(4.5,2,0), iso(5.8,2,0), iso(5.8,2,0.9), iso(4.5,2,0.9)];
-      s += quad(gpPts, '#9e9e9e', c.mur, 1);
-      const gl = iso(5.15, 2, 0.45);
-      s += `<text x="${gl.x.toFixed(1)}" y="${gl.y.toFixed(1)}" text-anchor="middle" font-size="7" fill="${c.mur}">GARAGE</text>`;
+    // Garage
+    if(f.garage){
+      const gH=1.1;
+      s += quad([iso(x1+0.15,y0,0),iso(x1+1.5,y0,0),iso(x1+1.5,y0+1.6,0),iso(x1+0.15,y0+1.6,0)],c.fond,c.mur,1);
+      s += wall(x1+0.15,y0+1.6,x1+1.5,y0+1.6,gH,c.facade+'dd',c.mur);
+      s += wall(x1+1.5,y0,x1+1.5,y0+1.6,gH,c.ombre+'dd',c.mur);
+      s += quad([iso(x1+0.05,y0-0.1,gH),iso(x1+1.6,y0-0.1,gH),iso(x1+1.6,y0+1.7,gH),iso(x1+0.05,y0+1.7,gH)],c.toit,c.mur,1);
+      s += quad([iso(x1+0.15,y0+1.6,0),iso(x1+1.5,y0+1.6,0),iso(x1+1.5,y0+1.6,gH*0.8),iso(x1+0.15,y0+1.6,gH*0.8)],'#9e9e9e',c.mur,1);
+      const gl=iso(x1+0.82,y0+1.6,gH*0.4);
+      s+=`<text x="${gl.x.toFixed(1)}" y="${gl.y.toFixed(1)}" text-anchor="middle" font-size="7" fill="${c.mur}">GARAGE</text>`;
     }
 
-    // ── Végétation ────────────────────────────────────────────────────────────
-    [[0.2,0.3],[5.5,0.3],[5.5,4.5],[0.2,4.5]].forEach(([gx,gy])=>{
-      const base = iso(gx, gy, 0);
-      const haut = iso(gx, gy, 0.7);
-      s += `<line x1="${base.x.toFixed(1)}" y1="${base.y.toFixed(1)}" x2="${haut.x.toFixed(1)}" y2="${haut.y.toFixed(1)}" stroke="#5d4037" stroke-width="2"/>`;
-      s += `<circle cx="${haut.x.toFixed(1)}" cy="${(haut.y-8).toFixed(1)}" r="9" fill="${style==='tropical'?'#2e7d32':'#388e3c'}" opacity="0.85"/>`;
+    // Végétation
+    [[x0-0.5,y0-0.4],[x1+0.2,y0-0.4],[x0-0.5,y1+0.5]].forEach(([gx,gy])=>{
+      const base=iso(gx,gy,0), top=iso(gx,gy,0.8);
+      s+=`<line x1="${base.x.toFixed(1)}" y1="${base.y.toFixed(1)}" x2="${top.x.toFixed(1)}" y2="${top.y.toFixed(1)}" stroke="#5d4037" stroke-width="2"/>`;
+      const tc=['tropical','traditionnel africain'].includes(style)?'#1b5e20':'#2e7d32';
+      s+=`<circle cx="${top.x.toFixed(1)}" cy="${(top.y-9).toFixed(1)}" r="10" fill="${tc}" opacity="0.9"/>`;
     });
 
-    // Titre
-    s += `<text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="8" fill="#888">Vue isométrique — Style ${style}</text>`;
-    s += `</svg>`;
+    s+=`<text x="${W/2}" y="${H-4}" text-anchor="middle" font-size="7.5" fill="#888">Vue isométrique — Style ${style}</text>`;
+    s+=`</svg>`;
     return s;
   }
 
-  // ── AFFICHER IMAGES ──────────────────────────────────────────────────────────
-  function afficherImages(style) {
-    const grid = document.getElementById('image-grid');
-    const sec  = document.getElementById('image-section');
-    const urls = IMAGES[style] || IMAGES['moderne'];
-    grid.innerHTML = '';
-    urls.forEach(url => {
-      const img = document.createElement('img');
-      img.src = url; img.alt = 'Référence';
-      img.loading = 'lazy';
-      img.onerror = () => { img.style.display='none'; };
-      grid.appendChild(img);
-    });
-    sec.style.display = 'block';
-  }
-
-  // ── GÉNÉRER ──────────────────────────────────────────────────────────────────
+  // ── GÉNÉRATION PRINCIPALE ────────────────────────────────────────────────────
   async function generer() {
     const prompt     = document.getElementById('prompt').value.trim();
     const superficie = document.getElementById('superficie').value;
@@ -510,123 +532,118 @@
     const style      = document.getElementById('style').value;
     if(!prompt){ alert('Veuillez décrire votre projet.'); return; }
 
-    const promptComplet = `${prompt}. Style : ${style}.${superficie?' Superficie : '+superficie+' m².':''}${pieces?' Nombre de pièces : '+pieces+'.':''}`;
-    lastPrompt = promptComplet;
+    currentDesc=prompt; currentPieces=pieces; currentSuperficie=superficie; currentStyle=style;
+    planVariante=0;
 
-    const btn          = document.getElementById('generateBtn');
-    const loader       = document.getElementById('loader');
-    const result       = document.getElementById('result');
-    const shareSection = document.getElementById('shareSection');
-    const actionBtns   = document.getElementById('action-buttons');
-    const plansSection = document.getElementById('plans-section');
+    const promptComplet=`${prompt}. Style : ${style}.${superficie?' Superficie : '+superficie+' m².':''}${pieces?' Nombre de pièces : '+pieces+'.':''}`;
+    lastPrompt=promptComplet;
 
-    btn.disabled=true; loader.style.display='block';
-    result.style.display='none'; shareSection.style.display='none';
-    actionBtns.style.display='none'; plansSection.style.display='none';
+    const btn=document.getElementById('generateBtn');
+    btn.disabled=true;
+    document.getElementById('loader').style.display='block';
+    document.getElementById('result').style.display='none';
+    document.getElementById('shareSection').style.display='none';
+    document.getElementById('action-row').style.display='none';
+    document.getElementById('plans-section').style.display='none';
+    document.getElementById('nouveau-plan-btn').style.display='none';
+    document.getElementById('image-section').style.display='none';
 
-    // Photos immédiatement
-    afficherImages(style);
+    // Image référence
+    const img=document.getElementById('ref-image');
+    img.src=IMAGE_REF[style]||IMAGE_REF['moderne'];
+    img.onerror=()=>{img.style.display='none';};
+    img.onload=()=>{img.style.display='block';};
+    document.getElementById('image-section').style.display='block';
 
-    // Plans 2D + 3D immédiatement
-    document.getElementById('plan2d-container').innerHTML = genererPlan2D(prompt, pieces, superficie, style);
-    document.getElementById('plan3d-container').innerHTML = genererVue3D(prompt, pieces, superficie, style);
-    plansSection.style.display = 'block';
+    // Plans immédiats
+    afficherPlans();
 
     try {
-      const response = await fetch('/api/generate', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ prompt: promptComplet })
-      });
-      const data = await response.json();
-      if(!response.ok) throw new Error(data.error||'Erreur serveur');
-      lastResult = data.result;
-      document.getElementById('result-text').textContent = lastResult;
-      result.style.display='block';
-      actionBtns.style.display='flex';
-      shareSection.style.display='block';
-    } catch(err) {
-      alert('Erreur : '+err.message);
-    } finally {
-      btn.disabled=false; loader.style.display='none';
-    }
+      const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:promptComplet})});
+      const data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Erreur serveur');
+      lastResult=data.result;
+      document.getElementById('result-text').textContent=lastResult;
+      document.getElementById('result').style.display='block';
+      document.getElementById('action-row').style.display='flex';
+      document.getElementById('shareSection').style.display='block';
+    } catch(err){ alert('Erreur : '+err.message); }
+    finally { btn.disabled=false; document.getElementById('loader').style.display='none'; }
+  }
+
+  function afficherPlans(){
+    document.getElementById('plan2d').innerHTML=genPlan2D(currentDesc,currentPieces,currentSuperficie,currentStyle,planVariante);
+    document.getElementById('plan3d').innerHTML=genVue3D(currentDesc,currentPieces,currentSuperficie,currentStyle,planVariante);
+    document.getElementById('plans-section').style.display='block';
+    document.getElementById('nouveau-plan-btn').style.display='block';
+  }
+
+  function nouveauPlan(){
+    planVariante++;
+    afficherPlans();
   }
 
   // ── PDF TEXTE ────────────────────────────────────────────────────────────────
-  function telechargerPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+  function telechargerPDF(){
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF();
     doc.setFontSize(20); doc.setTextColor(15,30,80);
-    doc.text('ArchiAI - Plan Architectural', 20, 22);
-    doc.setFontSize(11); doc.setTextColor(120);
-    doc.text('Projet : '+lastPrompt.substring(0,80), 20, 34);
-    doc.text('Genere le : '+new Date().toLocaleDateString('fr-FR'), 20, 42);
-    doc.setDrawColor(201,168,76); doc.setLineWidth(0.8); doc.line(20,48,190,48);
-    doc.setFontSize(11); doc.setTextColor(30);
-    doc.text(doc.splitTextToSize(lastResult,170), 20, 58);
-    doc.setFontSize(9); doc.setTextColor(160);
-    doc.text('ArchiAI - Propulse par Groq IA', 20, 285);
+    doc.text('ArchiAI - Plan Architectural',20,22);
+    doc.setFontSize(10); doc.setTextColor(120);
+    doc.text('Projet : '+lastPrompt.substring(0,90),20,33);
+    doc.text('Genere le : '+new Date().toLocaleDateString('fr-FR'),20,41);
+    doc.setDrawColor(201,168,76); doc.setLineWidth(0.8); doc.line(20,47,190,47);
+    doc.setFontSize(10.5); doc.setTextColor(30);
+    doc.text(doc.splitTextToSize(lastResult,170),20,56);
+    doc.setFontSize(8); doc.setTextColor(160);
+    doc.text('ArchiAI - Propulse par Groq IA',20,285);
     doc.save('plan-archi-ai.pdf');
   }
 
   // ── PDF PLANS ────────────────────────────────────────────────────────────────
-  function svgToCanvas(svgEl, w, h, cb) {
-    const canvas = document.createElement('canvas');
-    canvas.width=w; canvas.height=h;
-    const ctx = canvas.getContext('2d');
-    const data = new XMLSerializer().serializeToString(svgEl);
-    const blob = new Blob([data],{type:'image/svg+xml;charset=utf-8'});
-    const url  = URL.createObjectURL(blob);
-    const img  = new Image();
-    img.onload = () => {
-      ctx.fillStyle='#f0f4f8'; ctx.fillRect(0,0,w,h);
-      ctx.drawImage(img,0,0,w,h);
-      URL.revokeObjectURL(url);
-      cb(canvas.toDataURL('image/png'));
-    };
-    img.src = url;
+  function svgToImg(svgEl,w,h,cb){
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    const ctx=c.getContext('2d');
+    const data=new XMLSerializer().serializeToString(svgEl);
+    const blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{ ctx.fillStyle='#f9f7f2'; ctx.fillRect(0,0,w,h); ctx.drawImage(img,0,0,w,h); URL.revokeObjectURL(url); cb(c.toDataURL('image/png')); };
+    img.src=url;
   }
 
-  function telechargerPlanPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({orientation:'landscape', format:'a4'});
-    const svg2D = document.querySelector('#plan2d-container svg');
-    const svg3D = document.querySelector('#plan3d-container svg');
-    if(!svg2D||!svg3D){ alert('Aucun plan à télécharger.'); return; }
-
-    doc.setFontSize(16); doc.setTextColor(15,30,80);
-    doc.text('ArchiAI - Plans Architecturaux', 20, 16);
-    doc.setFontSize(9); doc.setTextColor(120);
-    doc.text(lastPrompt.substring(0,100), 20, 24);
-    doc.setDrawColor(201,168,76); doc.line(20,28,277,28);
-
-    svgToCanvas(svg2D,420,360,(img2D)=>{
-      doc.addImage(img2D,'PNG',15,32,128,110);
+  function telechargerPlanPDF(){
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({orientation:'landscape',format:'a4'});
+    const svg2=document.querySelector('#plan2d svg');
+    const svg3=document.querySelector('#plan3d svg');
+    if(!svg2||!svg3){alert('Aucun plan disponible.'); return;}
+    doc.setFontSize(15); doc.setTextColor(15,30,80);
+    doc.text('ArchiAI - Plans Architecturaux',20,15);
+    doc.setFontSize(9); doc.setTextColor(100);
+    doc.text(lastPrompt.substring(0,110),20,23);
+    doc.setDrawColor(201,168,76); doc.line(20,27,277,27);
+    svgToImg(svg2,440,380,d2=>{
+      doc.addImage(d2,'PNG',14,31,130,112);
       doc.setFontSize(8); doc.setTextColor(80);
-      doc.text('Plan 2D — Floor Plan', 15, 146);
-
-      svgToCanvas(svg3D,420,360,(img3D)=>{
-        doc.addImage(img3D,'PNG',148,32,128,110);
-        doc.text('Vue 3D Isométrique', 148, 146);
+      doc.text('Plan 2D — Floor Plan',14,146);
+      svgToImg(svg3,440,380,d3=>{
+        doc.addImage(d3,'PNG',150,31,130,112);
+        doc.text('Vue 3D Isométrique',150,146);
         doc.setFontSize(7); doc.setTextColor(160);
-        doc.text('ArchiAI - '+new Date().toLocaleDateString('fr-FR'), 20, 205);
+        doc.text('ArchiAI - '+new Date().toLocaleDateString('fr-FR')+' — Variante '+(planVariante+1),20,205);
         doc.save('plans-archi-ai.pdf');
       });
     });
   }
 
   // ── PARTAGE ──────────────────────────────────────────────────────────────────
-  function partager(type) {
-    const texte = encodeURIComponent('🏠 Plan ArchiAI :\n\n'+lastResult);
-    const url   = encodeURIComponent(window.location.href);
-    const liens = {
-      whatsapp:`https://wa.me/?text=${texte}`,
-      telegram:`https://t.me/share/url?url=${url}&text=${texte}`,
-      email:`mailto:?subject=Mon plan ArchiAI&body=${texte}`,
-      sms:`sms:?body=${texte}`,
-      linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`
-    };
-    if(type==='copy'){ navigator.clipboard.writeText(lastResult); alert('Copié !'); }
-    else window.open(liens[type],'_blank');
+  function partager(type){
+    const t=encodeURIComponent('🏠 Plan ArchiAI :\n\n'+lastResult);
+    const u=encodeURIComponent(window.location.href);
+    const l={whatsapp:`https://wa.me/?text=${t}`,telegram:`https://t.me/share/url?url=${u}&text=${t}`,email:`mailto:?subject=Mon plan ArchiAI&body=${t}`,sms:`sms:?body=${t}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${u}`};
+    if(type==='copy'){navigator.clipboard.writeText(lastResult);alert('Copié !');}
+    else window.open(l[type],'_blank');
   }
 </script>
 </body>
